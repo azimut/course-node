@@ -1,0 +1,12 @@
+{
+  "name": "pre-entrega",
+  "version": "1.0.0",
+  "description": "Pre-entrega del curso de Node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "azimut <azimut.github@protonmail.com> (https://github.com/azimut)",
+  "license": "MIT",
+  "type": "module"
+}
