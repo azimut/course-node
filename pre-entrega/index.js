@@ -37,11 +37,16 @@ function pidOf(s) {
   return parseInt(spid);
 }
 
+if (process.argv.length < 4) {
+  console.error("Wrong number of arguments!");
+  process.exit(1);
+}
+
 const [, , method, resource, ...params] = process.argv;
 
 switch (method.toUpperCase()) {
   case "GET":
-    if (resource === "products") {
+    if (resource.toLowerCase() === "products") {
       getProducts();
     } else {
       const pid = pidOf(resource);
