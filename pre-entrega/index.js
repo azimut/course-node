@@ -37,22 +37,22 @@ function pidOf(s) {
   return parseInt(spid);
 }
 
-const [, , method, ...resource] = process.argv;
+const [, , method, resource, ...params] = process.argv;
 
 if (method === "GET") {
-  if (resource[0] === "products") {
+  if (resource === "products") {
     getProducts();
   } else {
-    const pid = pidOf(resource[0]);
+    const pid = pidOf(resource);
     getProduct(pid);
   }
 }
 if (method === "DELETE") {
-  const pid = pidOf(resource[0]);
+  const pid = pidOf(resource);
   deleteProduct(pid);
 }
 if (method === "POST") {
-  const [title, price, category] = resource;
+  const [title, price, category] = params;
   const pid = await createProduct(title, price, category);
   console.log(pid);
 }
