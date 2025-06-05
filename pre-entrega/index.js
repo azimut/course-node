@@ -39,20 +39,23 @@ function pidOf(s) {
 
 const [, , method, resource, ...params] = process.argv;
 
-if (method === "GET") {
-  if (resource === "products") {
-    getProducts();
-  } else {
+switch (method.toUpperCase()) {
+  case "GET":
+    if (resource === "products") {
+      getProducts();
+    } else {
+      const pid = pidOf(resource);
+      getProduct(pid);
+    }
+    break;
+  case "DELETE":
     const pid = pidOf(resource);
-    getProduct(pid);
-  }
-}
-if (method === "DELETE") {
-  const pid = pidOf(resource);
-  deleteProduct(pid);
-}
-if (method === "POST") {
-  const [title, price, category] = params;
-  const pid = await createProduct(title, price, category);
-  console.log(pid);
+    deleteProduct(pid);
+    break;
+  case "POST":
+    const [title, price, category] = params;
+    createProduct(title, price, category).then(console.log);
+    break;
+  default:
+    console.error(`Unsupported method: ${method}`);
 }
