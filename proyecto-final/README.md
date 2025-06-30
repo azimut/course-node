@@ -19,6 +19,9 @@ $ npm run start
 
 ## Referencias
 
-- [HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status)
-- [HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods)
-- https://httpstat.us/
+- [Estados de respuesta HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status)
+- [Metodos HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods)
+- Sitios usados como referencia del comportamiento tipico de una API:
+  - https://httpstat.us/
+  - https://reqres.in/
+  - https://fakestoreapi.com/
