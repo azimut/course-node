@@ -1,6 +1,8 @@
 # proyecto-final-ecommerce
 
-## Objectivo
+**objetivo, descripcion y alcance del proyecto**
+
+## Objetivo
 ## Tecnologias
 
 - node.js
@@ -14,3 +16,8 @@
 ``` shellsession
 $ npm run start
 ```
+
+## Referencias
+
+- [HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status)
+- [HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods)
