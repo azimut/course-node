@@ -12,6 +12,7 @@
   "author": "azimut <azimut.github@protonmail.com> (https://github.com/azimut)",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^5.1.0"
   }
 }
