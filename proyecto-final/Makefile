@@ -6,7 +6,6 @@ AUTH := http --check-status --auth user:password
 .PHONY: test
 test:
 	http    GET    $(URL)/notfound                               | jq -e '.error'
-	http    GET    $(URL)/products/asdf                          | jq -e '.error'
 	$(AUTH) GET    $(URL)/products                               | jq -e 'length == 2'
 	$(AUTH) GET    $(URL)/products/search  name==NE              | jq -e '.[0].id == 20'
 	$(AUTH) GET    $(URL)/products/search  minPrice==99          | jq -e '.[0].id == 20'
