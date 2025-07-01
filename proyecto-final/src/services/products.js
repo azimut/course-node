@@ -35,5 +35,9 @@ export function createProduct(name, price, brand) {
 }
 
 export function deleteProduct(id) {
-  products = products.filter((p) => p.id !== id);
+  products = products.filter((p) => p.id !== parseInt(id));
+}
+
+export function existsProduct(id) {
+  return products.findIndex((p) => p.id === parseInt(id)) == -1 ? false : true;
 }

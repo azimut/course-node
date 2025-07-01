@@ -29,17 +29,28 @@ export function createProduct(req, res) {
   }
 }
 
-export function updateProduct(_req, res) {
-  const exists = true;
-  if (exists) {
-    res.status(status.NO_CONTENT).send();
+export function updateProduct(req, res) {
+  const { name, brand, price } = req.body;
+  if (name && brand && price) {
+    const existed = service.existsProduct(req.params.id);
+    // TODO: call to updateProduct(id, name, brand, price)
+    res.status(existed ? status.NO_CONTENT : status.CREATED).send();
   } else {
-    res.status(status.CREATED);
+    res.status(status.BAD_REQUEST).json({ error: "not enough fields" });
   }
 }
 
-export function patchProduct(_req, res) {
-  res.status(status.NO_CONTENT).send();
+export function patchProduct(req, res) {
+  const { name, brand, price } = req.body;
+  if (name || brand || price) {
+    if (service.existsProduct(req.params.id)) {
+      res.status(status.NO_CONTENT).send();
+    } else {
+      res.status(status.NOT_FOUND).send();
+    }
+  } else {
+    res.status(status.UNPROCESSABLE_ENTITY).send();
+  }
 }
 
 export function searchProduct(_req, res) {
