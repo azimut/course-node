@@ -1,20 +1,31 @@
 import status from "http-status";
+import * as service from "../services/products.js";
 
-export function deleteProduct(_req, res) {
+export function getProducts(_req, res) {
+  res.json(service.getProducts());
+}
+
+export function getProduct(req, res) {
+  const product = service.getProduct(req.params.id);
+  if (product) {
+    res.json(product);
+  } else {
+    res.status(status.NOT_FOUND).json({ error: "product not found" });
+  }
+}
+
+export function deleteProduct(req, res) {
+  service.deleteProduct(req.params.id);
   res.status(status.NO_CONTENT).send();
 }
 
-export function addNewProduct(req, res) {
-  try {
-    const { name, price } = req.body;
-    const products = [];
-    const product = { name, price };
-    const id = 999;
-    product.id = id;
-    products.push(product);
+export function createProduct(req, res) {
+  const { name, price, brand } = req.body;
+  if (name && price && brand) {
+    service.createProduct(name, price, brand);
     res.status(status.CREATED).json(products);
-  } catch (err) {
-    res.status(status.NOT_FOUND).json({ error: "not enough params" });
+  } else {
+    res.status(status.BAD_REQUEST).json({ error: "not enough fields" });
   }
 }
 
@@ -33,18 +44,4 @@ export function patchProduct(_req, res) {
 
 export function searchProduct(_req, res) {
   res.json({});
-}
-
-export function getProduct(_req, res) {
-  const product = {};
-  if (product) {
-    res.json(product);
-  } else {
-    res.status(status.NOT_FOUND).json({ error: "product not found" });
-  }
-}
-
-export function getProducts(_req, res) {
-  const products = [];
-  res.json(products);
 }

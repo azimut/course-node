@@ -1,7 +1,7 @@
 import { Router } from "express";
 import status from "http-status";
 import {
-  addNewProduct,
+  createProduct,
   deleteProduct,
   getProduct,
   getProducts,
@@ -13,9 +13,9 @@ import {
 const router = Router();
 
 router.get("/", getProducts);
-router.get("/:id", getProduct);
 router.get("/search", searchProduct);
-router.post("/", addNewProduct);
+router.get("/:id", getProduct);
+router.post("/", createProduct);
 router.put("/:id", updateProduct);
 router.patch("/:id", patchProduct);
 router.delete("/:id", deleteProduct);
