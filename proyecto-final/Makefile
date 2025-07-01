@@ -1,7 +1,7 @@
-USER := username
-PASS := password
-HOST := 127.0.0.1
-PORT := 3030
+USER ?= username
+PASS ?= password
+HOST ?= 127.0.0.1
+PORT ?= 3030
 URL  := $(HOST):$(PORT)
 HTTP := http --check-status --session proyecto-final
 CURL := curl --silent -w '%{http_code}'
