@@ -28,8 +28,8 @@ export function getProduct(id) {
 }
 
 export function createProduct(newProduct) {
-  const { id = products.length + 1 } = newProduct;
-  deleteProduct(id);
+  newProduct.id = newProduct.id || products.length + 1;
+  deleteProduct(newProduct.id);
   products.push(newProduct);
   return newProduct;
 }
