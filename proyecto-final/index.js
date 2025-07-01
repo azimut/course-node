@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import status from "http-status";
-import products from "./routes/products.js";
+import products from "./src/routes/products.js";
 
 const PORT = 3030;
 const app = express();
