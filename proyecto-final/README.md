@@ -9,6 +9,7 @@
 - express
 - cors
 - http-status
+- express-validator: para castear, validar y manejar errores de usuario
 
 ## Configuration
 ## Ejecucion
@@ -21,6 +22,7 @@ $ npm run start
 
 - [Estados de respuesta HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status)
 - [Metodos HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods)
+- https://en.wikipedia.org/wiki/PATCH_(HTTP)
 - https://expressjs.com/en/api.html
 - Sitios usados como referencia del comportamiento tipico de una API:
   - https://httpstat.us/

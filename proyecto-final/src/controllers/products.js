@@ -1,4 +1,5 @@
 import status from "http-status";
+import { validationResult } from "express-validator";
 import * as service from "../services/products.js";
 
 export function getProducts(_req, res) {
@@ -20,19 +21,18 @@ export function deleteProduct(req, res) {
 }
 
 export function createProduct(req, res) {
-  const { name, price, brand } = req.body;
-  if (name && price && brand) {
-    service.createProduct(name, price, brand);
-    res.status(status.CREATED).json(products);
+  if (validationResult(req).isEmpty()) {
+    service.createProduct(req.body);
+    res.status(status.CREATED).json(service.getProducts());
   } else {
     res.status(status.BAD_REQUEST).json({ error: "not enough fields" });
   }
 }
 
 export function updateProduct(req, res) {
-  const { name, brand, price } = req.body;
-  if (name && brand && price) {
+  if (validationResult(req).isEmpty()) {
     const existed = service.existsProduct(req.params.id);
+    // const { name, brand, price } = req.body;
     // TODO: call to updateProduct(id, name, brand, price)
     res.status(existed ? status.NO_CONTENT : status.CREATED).send();
   } else {

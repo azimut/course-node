@@ -24,10 +24,10 @@ export function getProducts() {
 }
 
 export function getProduct(id) {
-  return products.find((p) => p.id === parseInt(id));
+  return products.find((p) => p.id === id);
 }
 
-export function createProduct(name, price, brand) {
+export function createProduct({ name, price, brand }) {
   const newProduct = { name, price, brand };
   newProduct.id = products.length + 1;
   products.push(newProduct);
@@ -35,9 +35,9 @@ export function createProduct(name, price, brand) {
 }
 
 export function deleteProduct(id) {
-  products = products.filter((p) => p.id !== parseInt(id));
+  products = products.filter((p) => p.id !== id);
 }
 
 export function existsProduct(id) {
-  return products.findIndex((p) => p.id === parseInt(id)) == -1 ? false : true;
+  return products.findIndex((p) => p.id === id) == -1 ? false : true;
 }

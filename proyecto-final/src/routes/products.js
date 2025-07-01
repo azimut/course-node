@@ -1,5 +1,5 @@
 import { Router } from "express";
-import status from "http-status";
+import { body, param } from "express-validator";
 import {
   createProduct,
   deleteProduct,
@@ -14,10 +14,23 @@ const router = Router();
 
 router.get("/", getProducts);
 router.get("/search", searchProduct);
-router.get("/:id", getProduct);
-router.post("/", createProduct);
-router.put("/:id", updateProduct);
-router.patch("/:id", patchProduct);
-router.delete("/:id", deleteProduct);
+router.get("/:id", param("id").toInt(), getProduct);
+router.post(
+  "/",
+  body("name").exists().notEmpty(),
+  body("brand").exists().notEmpty(),
+  body("price").exists().notEmpty().isFloat().toFloat(),
+  createProduct
+);
+router.put(
+  "/:id",
+  param("id").toInt(),
+  body("name").exists().notEmpty(),
+  body("brand").exists().notEmpty(),
+  body("price").exists().notEmpty().isFloat().toFloat(),
+  updateProduct
+);
+router.patch("/:id", param("id").toInt(), patchProduct);
+router.delete("/:id", param("id").toInt(), deleteProduct);
 
 export default router;
