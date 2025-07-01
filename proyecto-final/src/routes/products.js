@@ -1,26 +1,18 @@
 import { Router } from "express";
 import { body, param } from "express-validator";
-import {
-  createProduct,
-  deleteProduct,
-  getProduct,
-  getProducts,
-  patchProduct,
-  updateProduct,
-  searchProduct,
-} from "../controllers/products.js";
+import * as controller from "../controllers/products.js";
 
 const router = Router();
 
-router.get("/", getProducts);
-router.get("/search", searchProduct);
-router.get("/:id", param("id").toInt(), getProduct);
+router.get("/", controller.getProducts);
+router.get("/search", controller.searchProduct);
+router.get("/:id", param("id").toInt(), controller.getProduct);
 router.post(
   "/",
   body("name").exists().notEmpty(),
   body("brand").exists().notEmpty(),
   body("price").exists().notEmpty().isFloat().toFloat(),
-  createProduct
+  controller.createProduct
 );
 router.put(
   "/:id",
@@ -28,9 +20,9 @@ router.put(
   body("name").exists().notEmpty(),
   body("brand").exists().notEmpty(),
   body("price").exists().notEmpty().isFloat().toFloat(),
-  updateProduct
+  controller.updateProduct
 );
-router.patch("/:id", param("id").toInt(), patchProduct);
-router.delete("/:id", param("id").toInt(), deleteProduct);
+router.patch("/:id", param("id").toInt(), controller.patchProduct);
+router.delete("/:id", param("id").toInt(), controller.deleteProduct);
 
 export default router;
