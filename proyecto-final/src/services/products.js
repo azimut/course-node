@@ -52,3 +52,12 @@ export function deleteProduct(id) {
 export function existsProduct(id) {
   return products.findIndex((p) => p.id === id) == -1 ? false : true;
 }
+
+export function searchProduct({ name, brand, minPrice, maxPrice }) {
+  let result = products;
+  if (name) result = result.filter((p) => p.name.includes(name));
+  if (brand) result = result.filter((p) => p.brand.includes(brand));
+  if (minPrice) result = result.filter((p) => p.price > minPrice);
+  if (maxPrice) result = result.filter((p) => p.price < maxPrice);
+  return result;
+}
