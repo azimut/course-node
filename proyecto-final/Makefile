@@ -20,7 +20,7 @@ test:
 	$(HTTP) GET    $(URL)/products/search  minPrice==99                    | jq -e 'length == 1'
 	$(HTTP) GET    $(URL)/products/search  maxPrice==99                    | jq -e 'length == 2'
 	$(HTTP) GET    $(URL)/products/search  maxPrice==1                     | jq -e 'length == 0'
-	http    GET    $(URL)/products/search  foo==bar                        | jq -e '.errors'
+	http    GET    $(URL)/products/search  foo==bar                        | jq -e '.errors[0].msg'
 	$(HTTP) PUT    $(URL)/products/80      name=Z80   price=8.0 brand=NEC  | jq -e
 	$(HTTP) GET    $(URL)/products/80                                      | jq -e '.price == 8.0'
 	$(HTTP) PATCH  $(URL)/products/80      price=79.9                      | jq -e

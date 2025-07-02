@@ -48,6 +48,11 @@ export function patchProduct(req, res) {
   } else res.status(status.BAD_REQUEST).json({ errors: result.array() });
 }
 
-export function searchProduct(_req, res) {
-  res.json({});
+export function searchProduct(req, res) {
+  const result = validationResult(req);
+  if (result.isEmpty()) {
+    res.json(service.searchProduct(req.query));
+  } else {
+    res.status(status.BAD_REQUEST).json({ errors: result.array() });
+  }
 }
