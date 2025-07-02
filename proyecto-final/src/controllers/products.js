@@ -22,9 +22,7 @@ export function createProduct(req, res) {
   if (result.isEmpty()) {
     service.createProduct(req.body);
     res.status(status.CREATED).json(service.getProducts());
-  } else {
-    res.status(status.BAD_REQUEST).json({ errors: result.array() });
-  }
+  } else res.status(status.BAD_REQUEST).json({ errors: result.array() });
 }
 
 export function updateProduct(req, res) {
@@ -33,9 +31,7 @@ export function updateProduct(req, res) {
     const existed = service.existsProduct(req.params.id);
     service.createProduct({ id: req.params.id, ...req.body });
     res.status(existed ? status.NO_CONTENT : status.CREATED).send();
-  } else {
-    res.status(status.BAD_REQUEST).json({ errors: result.array() });
-  }
+  } else res.status(status.BAD_REQUEST).json({ errors: result.array() });
 }
 
 export function patchProduct(req, res) {
@@ -52,7 +48,5 @@ export function searchProduct(req, res) {
   const result = validationResult(req);
   if (result.isEmpty()) {
     res.json(service.searchProduct(req.query));
-  } else {
-    res.status(status.BAD_REQUEST).json({ errors: result.array() });
-  }
+  } else res.status(status.BAD_REQUEST).json({ errors: result.array() });
 }
