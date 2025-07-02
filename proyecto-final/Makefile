@@ -1,7 +1,7 @@
 USER ?= username
 HOST ?= 127.0.0.1
 PORT ?= 3030
-URL  := $(HOST):$(PORT)
+URL  ?= $(HOST):$(PORT)
 OK   := http --session proyecto-final --check-status
 FAIL := http --session proyecto-final
 
