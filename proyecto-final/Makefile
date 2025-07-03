@@ -1,15 +1,16 @@
 SHELL = /bin/bash -o pipefail
 USER ?= username
 URL  ?= :3030
-OK   := curlie -sf -b cookiejar.txt -c cookiejar.txt
-FAIL := curlie -s  -b cookiejar.txt -c cookiejar.txt
+OK   := curlie -fsb jar.txt -c jar.txt
+FAIL := curlie  -sb jar.txt -c jar.txt
 
 .PHONY: test
 test:
-	http       GET    $(URL)/notfound                                         | jq -e '.error'
+	sleep 0.4
+	curlie -s  GET    $(URL)/notfound                                         | jq -e '.error'
 #	$(OK)      POST   $(URL)/login            user=$(USER)
 	$(OK)      GET    $(URL)/products                                         | jq -e 'length == 3'
-	$(OK)      POST   $(URL)/products         name=6502 price=650.2 brand=MOS | jq -e '.[]|select(.name == "6502")'
+	$(OK)      POST   $(URL)/products         name=6502 price=650.2 brand=MOS | jq -e 'map(select(.name=="6502"))|any'
 	$(OK)      DELETE $(URL)/products/4                                       | jq -e
 	$(OK)      GET    $(URL)/products                                         | jq -e 'length == 3'
 	$(OK)      GET    $(URL)/products/555                                     | jq -e '.name == "555"'
