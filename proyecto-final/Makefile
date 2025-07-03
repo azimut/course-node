@@ -9,7 +9,7 @@ test:
 	http       GET    $(URL)/notfound                                         | jq -e '.error'
 #	$(OK)      POST   $(URL)/login            user=$(USER)
 	$(OK)      GET    $(URL)/products                                         | jq -e 'length == 3'
-	$(OK)      POST   $(URL)/products         name=6502 price=650.2 brand=MOS | jq -e 'length == 4'
+	$(OK)      POST   $(URL)/products         name=6502 price=650.2 brand=MOS | jq -e '.[]|select(.name == "6502")'
 	$(OK)      DELETE $(URL)/products/4                                       | jq -e
 	$(OK)      GET    $(URL)/products                                         | jq -e 'length == 3'
 	$(OK)      GET    $(URL)/products/555                                     | jq -e '.name == "555"'
