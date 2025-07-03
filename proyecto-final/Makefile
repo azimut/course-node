@@ -25,4 +25,5 @@ test:
 	$(OK)      GET    $(URL)/products/80                                      | jq -e '.price == 79.9'
 
 .PHONY: dev
-dev: ; ls *.js src/*/*.js Makefile | entr -rcs '(node index.js &; make test)'
+dev: ; ls *.js src/*/*.js Makefile \
+	| entr -rcs '(node index.js &; time make test || notify-send -u critical -t 1000 "woops")'
