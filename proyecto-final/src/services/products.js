@@ -6,7 +6,7 @@ let products = [
     price: 133.1,
   },
   {
-    id: 2,
+    id: 80,
     name: "Z80",
     brand: "Zilog",
     price: 80.0,
