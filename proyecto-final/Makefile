@@ -1,8 +1,8 @@
 SHELL = /bin/bash -o pipefail
 USER ?= username
-URL  ?= 127.0.0.1:3030
-OK   := http --ignore-stdin --session proyecto-final --check-status
-FAIL := http --ignore-stdin --session proyecto-final
+URL  ?= :3030
+OK   := curlie -sf -b cookiejar.txt -c cookiejar.txt
+FAIL := curlie -s  -b cookiejar.txt -c cookiejar.txt
 
 .PHONY: test
 test:
@@ -13,7 +13,7 @@ test:
 	$(OK)      DELETE $(URL)/products/4                                       | jq -e
 	$(OK)      GET    $(URL)/products                                         | jq -e 'length == 3'
 	$(OK)      GET    $(URL)/products/555                                     | jq -e '.name == "555"'
-	$(FAIL) -v GET    $(URL)/products/1337                                    | grep -q 404
+	$(FAIL) -v GET    $(URL)/products/1337                                    |& grep -q 404
 	$(OK)      GET    $(URL)/products/search  name==555                       | jq -e 'length == 1'
 	$(OK)      GET    $(URL)/products/search  minPrice==99                    | jq -e 'length == 1'
 	$(OK)      GET    $(URL)/products/search  maxPrice==99                    | jq -e 'length == 2'
