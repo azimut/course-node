@@ -1,7 +1,8 @@
+SHELL = /bin/bash -o pipefail
 USER ?= username
 URL  ?= 127.0.0.1:3030
-OK   := http --session proyecto-final --check-status
-FAIL := http --session proyecto-final
+OK   := http --ignore-stdin --session proyecto-final --check-status
+FAIL := http --ignore-stdin --session proyecto-final
 
 .PHONY: test
 test:
@@ -24,4 +25,4 @@ test:
 	$(OK)      GET    $(URL)/products/80                                      | jq -e '.price == 79.9'
 
 .PHONY: dev
-dev: ; npm run dev
+dev: ; ls *.js src/*/*.js Makefile | entr -rcs '(node index.js &; make test)'
