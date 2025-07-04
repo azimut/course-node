@@ -36,4 +36,11 @@ export async function addProduct(product) {
   const products = await getAllProducts();
   products.push(product);
   await updateProducts(products);
+  return product;
+}
+
+export async function addNewProduct(product) {
+  const products = await getAllProducts();
+  const id = products.length + 1;
+  await addProduct({ id, ...product });
 }

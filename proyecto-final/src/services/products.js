@@ -1,12 +1,5 @@
 import * as model from "../models/products.js";
 
-export async function createProduct(newProduct) {
-  const products = await model.getAllProducts();
-  newProduct.id = newProduct.id || products.length + 1;
-  await model.addProduct(newProduct);
-  return newProduct;
-}
-
 export async function patchProduct(newProduct) {
   const product = await model.getProduct(newProduct.id); // assume it exists
   const {

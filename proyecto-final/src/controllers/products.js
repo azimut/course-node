@@ -30,7 +30,7 @@ export async function deleteProduct(req, res) {
 export async function createProduct(req, res) {
   const result = validationResult(req);
   if (result.isEmpty()) {
-    await service.createProduct(req.body);
+    await model.addNewProduct(req.body);
     const products = await model.getAllProducts();
     res.status(status.CREATED).json(products);
   } else res.status(status.BAD_REQUEST).json({ errors: result.array() });
@@ -40,7 +40,7 @@ export async function updateProduct(req, res) {
   const result = validationResult(req);
   if (result.isEmpty()) {
     const existed = await service.existsProduct(req.params.id);
-    await service.createProduct({ id: req.params.id, ...req.body });
+    await model.addProduct({ id: req.params.id, ...req.body });
     res.status(existed ? status.NO_CONTENT : status.CREATED).send();
   } else res.status(status.BAD_REQUEST).json({ errors: result.array() });
 }
