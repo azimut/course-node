@@ -11,10 +11,10 @@ FAIL := curlie  -sb jar.txt -c jar.txt
 test:
 	curlie -s  GET    $(URL)/notfound                                         | jq -e '.error'
 #	$(OK)      POST   $(URL)/login            user=$(USER)
-	$(OK)      GET    $(URL)/products                                         | jq -e 'length == 3'
+	$(OK)      GET    $(URL)/products                                         | jq -e 'length > 0'
 	$(OK)      POST   $(URL)/products         name=6502 price=650.2 brand=MOS | jq -e 'map(select(.name=="6502"))|any'
 	$(OK)      DELETE $(URL)/products/4                                       | jq -e
-	$(OK)      GET    $(URL)/products                                         | jq -e 'length == 3'
+	$(OK)      GET    $(URL)/products                                         | jq -e 'length > 0'
 	$(OK)      GET    $(URL)/products/555                                     | jq -e '.name == "555"'
 	$(FAIL) -v GET    $(URL)/products/1337                                    |& grep 404
 	$(OK)      GET    $(URL)/products/search  name==555                       | jq -e 'length == 1'

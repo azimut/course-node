@@ -1,52 +1,57 @@
 import status from "http-status";
 import { validationResult } from "express-validator";
 import * as service from "../services/products.js";
+import * as model from "../models/products.js";
 
-export function getProducts(_req, res) {
-  res.json(service.getProducts());
+export async function getProducts(_req, res) {
+  const products = await model.getAllProducts();
+  res.json(products);
 }
 
-export function getProduct(req, res) {
-  const product = service.getProduct(req.params.id);
+export async function getProduct(req, res) {
+  const product = await model.getProduct(req.params.id);
   if (product) res.json(product);
   else res.status(status.NOT_FOUND).json({});
 }
 
-export function deleteProduct(req, res) {
-  service.deleteProduct(req.params.id);
-  res.status(status.NO_CONTENT).send();
-}
-
-export function createProduct(req, res) {
+export async function searchProduct(req, res) {
   const result = validationResult(req);
   if (result.isEmpty()) {
-    service.createProduct(req.body);
-    res.status(status.CREATED).json(service.getProducts());
+    const results = await service.searchProduct(req.query);
+    res.json(results);
   } else res.status(status.BAD_REQUEST).json({ errors: result.array() });
 }
 
-export function updateProduct(req, res) {
+export async function deleteProduct(req, res) {
+  await model.deleteProduct(req.params.id);
+  res.status(status.NO_CONTENT).send();
+}
+
+export async function createProduct(req, res) {
   const result = validationResult(req);
   if (result.isEmpty()) {
-    const existed = service.existsProduct(req.params.id);
-    service.createProduct({ id: req.params.id, ...req.body });
+    await service.createProduct(req.body);
+    const products = await model.getAllProducts();
+    res.status(status.CREATED).json(products);
+  } else res.status(status.BAD_REQUEST).json({ errors: result.array() });
+}
+
+export async function updateProduct(req, res) {
+  const result = validationResult(req);
+  if (result.isEmpty()) {
+    const existed = await service.existsProduct(req.params.id);
+    await service.createProduct({ id: req.params.id, ...req.body });
     res.status(existed ? status.NO_CONTENT : status.CREATED).send();
   } else res.status(status.BAD_REQUEST).json({ errors: result.array() });
 }
 
-export function patchProduct(req, res) {
+export async function patchProduct(req, res) {
   const result = validationResult(req);
   if (result.isEmpty()) {
-    if (service.existsProduct(req.params.id)) {
-      service.patchProduct({ id: req.params.id, ...req.body });
+    const exists = await service.existsProduct(req.params.id);
+    if (exists) {
+      await service.patchProduct({ id: req.params.id, ...req.body });
       res.status(status.NO_CONTENT).send();
     } else res.status(status.NOT_FOUND).send();
-  } else res.status(status.BAD_REQUEST).json({ errors: result.array() });
-}
-
-export function searchProduct(req, res) {
-  const result = validationResult(req);
-  if (result.isEmpty()) {
-    res.json(service.searchProduct(req.query));
   } else res.status(status.BAD_REQUEST).json({ errors: result.array() });
 }
