@@ -1,3 +1,6 @@
+.POSIX:
+.SUFFIXES:
+
 SHELL = /bin/bash -o pipefail
 USER ?= username
 URL  ?= :3030
