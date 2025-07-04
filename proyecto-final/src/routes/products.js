@@ -9,8 +9,8 @@ router.get("/", controller.getProducts);
 router.get(
   "/search",
   oneOf([
-    query("name").isAlphanumeric().notEmpty(),
-    query("brand").isAlphanumeric().notEmpty(),
+    query("name").isAlphanumeric(),
+    query("brand").isAlphanumeric(),
     query("minPrice").isNumeric().toFloat(),
     query("maxPrice").isNumeric().toFloat(),
   ]),
@@ -19,16 +19,16 @@ router.get(
 router.get("/:id", param("id").toInt(), controller.getProduct);
 router.post(
   "/",
-  body("name").isAlphanumeric().notEmpty(),
-  body("brand").isAlphanumeric().notEmpty(),
+  body("name").isAlphanumeric(),
+  body("brand").isAlphanumeric(),
   body("price").isNumeric().toFloat(),
   controller.createProduct
 );
 router.put(
   "/:id",
   param("id").toInt(),
-  body("name").isAlphanumeric().notEmpty(),
-  body("brand").isAlphanumeric().notEmpty(),
+  body("name").isAlphanumeric(),
+  body("brand").isAlphanumeric(),
   body("price").isNumeric().toFloat(),
   controller.updateProduct
 );
@@ -36,8 +36,8 @@ router.patch(
   "/:id",
   param("id").toInt(),
   oneOf([
-    body("name").isAlphanumeric().notEmpty(),
-    body("brand").isAlphanumeric().notEmpty(),
+    body("name").isAlphanumeric(),
+    body("brand").isAlphanumeric(),
     body("price").isNumeric().toFloat(),
   ]),
   controller.patchProduct
