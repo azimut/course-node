@@ -1,6 +1,5 @@
 import http from "http-status";
 import { validationResult } from "express-validator";
-import * as service from "../services/products.js";
 import * as model from "../models/products.js";
 
 export async function getProducts(_req, res) {
@@ -20,7 +19,7 @@ export async function getProduct(req, res) {
 export async function searchProduct(req, res) {
   const result = validationResult(req);
   if (result.isEmpty()) {
-    const search = await service.searchProduct(req.query);
+    const search = await model.searchProduct(req.query);
     res.json(search);
   } else {
     res.status(http.BAD_REQUEST).json({ errors: result.array() });
@@ -32,7 +31,7 @@ export async function deleteProduct(req, res) {
   res.status(http.NO_CONTENT).send();
 }
 
-export async function createProduct(req, res) {
+export async function postProduct(req, res) {
   const result = validationResult(req);
   if (result.isEmpty()) {
     const product = await model.addNewProduct(req.body);
@@ -42,7 +41,7 @@ export async function createProduct(req, res) {
   }
 }
 
-export async function updateProduct(req, res) {
+export async function putProduct(req, res) {
   const result = validationResult(req);
   if (result.isEmpty()) {
     const product = await model.getProduct(req.params.id);
