@@ -1,5 +1,4 @@
 import http from "http-status";
-import { validationResult } from "express-validator";
 import * as model from "../models/products.js";
 
 export async function getProducts(_req, res) {
