@@ -10,14 +10,13 @@ const productsFilename = path.join(
 );
 
 export async function getAllProducts() {
-  const productsRaw = await fs.readFile(productsFilename, { encoding: "utf8" });
-  const products = JSON.parse(productsRaw);
-  return products;
+  return fs
+    .readFile(productsFilename, { encoding: "utf8" })
+    .then((json) => JSON.parse(json));
 }
 
 export async function getProduct(id) {
-  const products = await getAllProducts();
-  return products.find((p) => p.id === id);
+  return getAllProducts().then((ps) => ps.find((p) => p.id === id));
 }
 
 export async function deleteProduct(id) {
