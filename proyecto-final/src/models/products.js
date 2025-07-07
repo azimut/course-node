@@ -38,5 +38,5 @@ export async function addNewProduct(product) {
 }
 
 async function setProducts(products) {
-  fs.writeFile(productsFilename, JSON.stringify(products));
+  await fs.writeFile(productsFilename, JSON.stringify(products));
 }
