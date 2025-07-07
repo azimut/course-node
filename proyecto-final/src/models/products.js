@@ -32,9 +32,9 @@ export async function setProduct(product) {
 }
 
 export async function addNewProduct(product) {
-  const products = await getProducts();
-  const id = products.length + 1;
-  await setProduct({ id, ...product });
+  return getProducts().then((products) => {
+    setProduct({ id: products.length + 1, ...product });
+  });
 }
 
 async function setProducts(products) {
