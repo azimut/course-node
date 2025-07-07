@@ -13,12 +13,12 @@ import * as controller from "../controllers/products.js";
 const validateId = param("id").isInt().toInt();
 const validateProduct = [
   body("name").isAlphanumeric(),
-  body("brand").isAlphanumeric(),
+  body("categories").isArray(),
   body("price").isNumeric().toFloat(),
 ];
 const validateSearch = oneOf([
   query("name").isAlphanumeric(),
-  query("brand").isAlphanumeric(),
+  query("category").isAlphanumeric(),
   query("minPrice").isNumeric().toFloat(),
   query("maxPrice").isNumeric().toFloat(),
 ]);

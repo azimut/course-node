@@ -2,19 +2,29 @@
   {
     "id": 1,
     "name": "8048",
-    "brand": "Intel",
-    "price": 133.1
+    "price": 133.7,
+    "categories": [
+      "microcontroller",
+      "dip"
+    ]
   },
   {
     "id": 80,
     "name": "Z80",
-    "brand": "Zilog",
-    "price": 80.0
+    "price": 80.0,
+    "categories": [
+      "cpu",
+      "dip"
+    ]
   },
   {
     "id": 555,
     "name": "555",
-    "brand": "Signetics",
-    "price": 5.55
+    "price": 5.55,
+    "categories": [
+      "timer",
+      "dip",
+      "sop"
+    ]
   }
 ]
