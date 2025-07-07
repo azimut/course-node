@@ -8,17 +8,17 @@ export async function patchProduct(newProduct) {
     brand = product.brand,
     price = product.price,
   } = newProduct;
-  await model.addProduct({ id, name, brand, price });
+  await model.setProduct({ id, name, brand, price });
 }
 
 export async function existsProduct(id) {
   return model
-    .getAllProducts()
+    .getProducts()
     .then((ps) => ps.findIndex((p) => p.id === id) !== -1);
 }
 
 export async function searchProduct({ name, brand, minPrice, maxPrice }) {
-  let result = await model.getAllProducts();
+  let result = await model.getProducts();
   if (name) result = result.filter((p) => p.name.includes(name));
   if (brand) result = result.filter((p) => p.brand.includes(brand));
   if (minPrice) result = result.filter((p) => p.price > minPrice);

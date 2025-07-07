@@ -4,7 +4,7 @@ import * as service from "../services/products.js";
 import * as model from "../models/products.js";
 
 export async function getProducts(_req, res) {
-  const products = await model.getAllProducts();
+  const products = await model.getProducts();
   res.json(products);
 }
 
@@ -36,7 +36,7 @@ export async function createProduct(req, res) {
   const result = validationResult(req);
   if (result.isEmpty()) {
     await model.addNewProduct(req.body);
-    const products = await model.getAllProducts();
+    const products = await model.getProducts();
     res.status(http.CREATED).json(products);
   } else res.status(http.BAD_REQUEST).json({ errors: result.array() });
 }
@@ -45,7 +45,7 @@ export async function updateProduct(req, res) {
   const result = validationResult(req);
   if (result.isEmpty()) {
     const existed = await service.existsProduct(req.params.id);
-    await model.addProduct({ id: req.params.id, ...req.body });
+    await model.setProduct({ id: req.params.id, ...req.body });
     res.status(existed ? http.NO_CONTENT : http.CREATED).send();
   } else res.status(http.BAD_REQUEST).json({ errors: result.array() });
 }
