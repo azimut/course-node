@@ -2,22 +2,34 @@
 
 **objetivo, descripcion y alcance del proyecto**
 
+## Instalación
+
+``` shellsession
+$ npm install
+```
+
+## Ejecucion
+
+``` shellsession
+$ npm start
+```
+
 ## Objetivo
 ## Tecnologias
 
 - node.js
-- express
-- cors
-- http-status
-- express-validator: para castear, validar y manejar errores de usuario
+  - [express](https://www.npmjs.com/package/express): como web framework
+  - [cors](https://www.npmjs.com/package/cors): para configurar CORS headers
+  - [http-status](https://www.npmjs.com/package/http-status): para referirme a los estados http a traves de mnemonicos
+  - [express-validator](https://www.npmjs.com/package/express-validator): para castear, validar y manejar errores de usuario
+
+## Desarrollo
+
+- https://github.com/eradman/entr
+- https://github.com/rs/curlie
+- https://github.com/jqlang/jq/
 
 ## Configuration
-## Ejecucion
-
-``` shellsession
-$ npm run start
-```
-
 ## Referencias
 
 - [Estados de respuesta HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status)
