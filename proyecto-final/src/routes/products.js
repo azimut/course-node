@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { body, param, query, oneOf } from "express-validator";
+import { body, param, query, oneOf, checkExact } from "express-validator";
 
 import * as controller from "../controllers/products.js";
 
@@ -22,7 +22,8 @@ router.post(
   body("name").isAlphanumeric(),
   body("brand").isAlphanumeric(),
   body("price").isNumeric().toFloat(),
-  controller.createProduct
+  checkExact(),
+  controller.postProduct
 );
 router.put(
   "/:id",
@@ -30,7 +31,8 @@ router.put(
   body("name").isAlphanumeric(),
   body("brand").isAlphanumeric(),
   body("price").isNumeric().toFloat(),
-  controller.updateProduct
+  checkExact(),
+  controller.putProduct
 );
 router.patch(
   "/:id",
