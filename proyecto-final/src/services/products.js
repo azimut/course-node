@@ -1,11 +1,5 @@
 import * as model from "../models/products.js";
 
-export async function existsProduct(id) {
-  return model
-    .getProducts()
-    .then((ps) => ps.findIndex((p) => p.id === id) !== -1);
-}
-
 export async function searchProduct({ name, brand, minPrice, maxPrice }) {
   let result = await model.getProducts();
   if (name) result = result.filter((p) => p.name.includes(name));
