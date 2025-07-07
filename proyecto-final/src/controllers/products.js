@@ -17,13 +17,8 @@ export async function getProduct(req, res) {
 }
 
 export async function searchProduct(req, res) {
-  const result = validationResult(req);
-  if (result.isEmpty()) {
-    const search = await model.searchProduct(req.query);
-    res.json(search);
-  } else {
-    res.status(http.BAD_REQUEST).json({ errors: result.array() });
-  }
+  const search = await model.searchProduct(req.query);
+  res.json(search);
 }
 
 export async function deleteProduct(req, res) {
@@ -32,37 +27,22 @@ export async function deleteProduct(req, res) {
 }
 
 export async function postProduct(req, res) {
-  const result = validationResult(req);
-  if (result.isEmpty()) {
-    const product = await model.addNewProduct(req.body);
-    res.status(http.CREATED).json(product);
-  } else {
-    res.status(http.BAD_REQUEST).json({ errors: result.array() });
-  }
+  const product = await model.addNewProduct(req.body);
+  res.status(http.CREATED).json(product);
 }
 
 export async function putProduct(req, res) {
-  const result = validationResult(req);
-  if (result.isEmpty()) {
-    const product = await model.getProduct(req.params.id);
-    await model.setProduct({ ...product, ...req.body });
-    res.status(product ? http.NO_CONTENT : http.CREATED).send();
-  } else {
-    res.status(http.BAD_REQUEST).json({ errors: result.array() });
-  }
+  const product = await model.getProduct(req.params.id);
+  await model.setProduct({ ...product, ...req.body });
+  res.status(product ? http.NO_CONTENT : http.CREATED).send();
 }
 
 export async function patchProduct(req, res) {
-  const result = validationResult(req);
-  if (result.isEmpty()) {
-    const product = await model.getProduct(req.params.id);
-    if (product) {
-      await model.setProduct({ ...product, ...req.body });
-      res.status(http.NO_CONTENT).send();
-    } else {
-      res.status(http.NOT_FOUND).json({});
-    }
+  const product = await model.getProduct(req.params.id);
+  if (product) {
+    await model.setProduct({ ...product, ...req.body });
+    res.status(http.NO_CONTENT).send();
   } else {
-    res.status(http.BAD_REQUEST).json({ errors: result.array() });
+    res.status(http.NOT_FOUND).json({});
   }
 }
