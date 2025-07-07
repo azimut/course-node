@@ -35,10 +35,11 @@ export async function deleteProduct(req, res) {
 export async function createProduct(req, res) {
   const result = validationResult(req);
   if (result.isEmpty()) {
-    await model.addNewProduct(req.body);
-    const products = await model.getProducts();
-    res.status(http.CREATED).json(products);
-  } else res.status(http.BAD_REQUEST).json({ errors: result.array() });
+    const product = await model.addNewProduct(req.body);
+    res.status(http.CREATED).json(product);
+  } else {
+    res.status(http.BAD_REQUEST).json({ errors: result.array() });
+  }
 }
 
 export async function updateProduct(req, res) {
