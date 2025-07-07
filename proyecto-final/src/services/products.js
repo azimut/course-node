@@ -12,8 +12,9 @@ export async function patchProduct(newProduct) {
 }
 
 export async function existsProduct(id) {
-  const products = await model.getAllProducts();
-  return products.findIndex((p) => p.id === id) == -1 ? false : true;
+  return model
+    .getAllProducts()
+    .then((ps) => ps.findIndex((p) => p.id === id) !== -1);
 }
 
 export async function searchProduct({ name, brand, minPrice, maxPrice }) {
