@@ -1,16 +1,5 @@
 import * as model from "../models/products.js";
 
-export async function patchProduct(newProduct) {
-  const product = await model.getProduct(newProduct.id); // assume it exists
-  const {
-    id,
-    name = product.name,
-    brand = product.brand,
-    price = product.price,
-  } = newProduct;
-  await model.setProduct({ id, name, brand, price });
-}
-
 export async function existsProduct(id) {
   return model
     .getProducts()

@@ -48,16 +48,26 @@ export async function updateProduct(req, res) {
     const existed = await service.existsProduct(req.params.id);
     await model.setProduct({ id: req.params.id, ...req.body });
     res.status(existed ? http.NO_CONTENT : http.CREATED).send();
-  } else res.status(http.BAD_REQUEST).json({ errors: result.array() });
+  } else {
+    res.status(http.BAD_REQUEST).json({ errors: result.array() });
+  }
 }
 
 export async function patchProduct(req, res) {
   const result = validationResult(req);
   if (result.isEmpty()) {
-    const exists = await service.existsProduct(req.params.id);
-    if (exists) {
-      await service.patchProduct({ id: req.params.id, ...req.body });
+    const product = await model.getProduct(req.params.id);
+    if (product) {
+      await model.setProduct({
+        id: req.params.id,
+        ...product,
+        ...req.body,
+      });
       res.status(http.NO_CONTENT).send();
-    } else res.status(http.NOT_FOUND).send();
-  } else res.status(http.BAD_REQUEST).json({ errors: result.array() });
+    } else {
+      res.status(http.NOT_FOUND).json({});
+    }
+  } else {
+    res.status(http.BAD_REQUEST).json({ errors: result.array() });
+  }
 }
