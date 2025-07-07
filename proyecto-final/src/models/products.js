@@ -9,37 +9,34 @@ const productsFilename = path.join(
   "products.json"
 );
 
-export async function getAllProducts() {
-  return fs
-    .readFile(productsFilename, { encoding: "utf8" })
-    .then((json) => JSON.parse(json));
+export async function getProducts() {
+  return fs.readFile(productsFilename, { encoding: "utf8" }).then(JSON.parse);
 }
 
 export async function getProduct(id) {
-  return getAllProducts().then((ps) => ps.find((p) => p.id === id));
+  return getProducts().then((ps) => ps.find((p) => p.id === id));
 }
 
 export async function deleteProduct(id) {
-  const products = await getAllProducts();
+  const products = await getProducts();
   const filtered = products.filter((p) => p.id !== id);
-  await updateProducts(filtered);
+  await setProducts(filtered);
 }
 
-export async function updateProducts(products) {
-  const newProducts = JSON.stringify(products);
-  await fs.writeFile(productsFilename, newProducts);
-}
-
-export async function addProduct(product) {
+export async function setProduct(product) {
   await deleteProduct(product.id);
-  const products = await getAllProducts();
+  const products = await getProducts();
   products.push(product);
-  await updateProducts(products);
+  await setProducts(products);
   return product;
 }
 
 export async function addNewProduct(product) {
-  const products = await getAllProducts();
+  const products = await getProducts();
   const id = products.length + 1;
-  await addProduct({ id, ...product });
+  await setProduct({ id, ...product });
+}
+
+async function setProducts(products) {
+  fs.writeFile(productsFilename, JSON.stringify(products));
 }
