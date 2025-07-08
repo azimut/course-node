@@ -2,45 +2,71 @@
 
 **descripcion y alcance del proyecto**
 
-## Instalación
+
+## Instalacion y despliege
+
+Instalacion de las dependencias necesarias, edicion de las credenciales de Firebase (nuestra base de datos), y lanzamiento el servidor.
 
 ``` shellsession
 $ npm install
-```
-
-## Ejecucion
-
-``` shellsession
+$ nano .env
 $ npm start
 ```
 
-| http path            | method | description                            |
-|----------------------|--------|----------------------------------------|
-| /api/products        | GET    | gets all products                      |
-| /api/products        | POST   | creates a new product                  |
-| /api/products/search | GET    | searchs                                |
-| /api/products/:id    | GET    | gets an existing product               |
-| /api/products/:id    | DELETE | deletes an existing product            |
-| /api/products/:id    | PUT    | updates an existing product            |
-| /api/products/:id    | PATCH  | updates a field on an existing product |
-
-## Objetivo
-## Configuration
-## Tecnologias
+## Tecnologias usadas
 
 - node.js
   - [express](https://www.npmjs.com/package/express): como web framework
   - [cors](https://www.npmjs.com/package/cors): para configurar CORS headers
-  - [http-status](https://www.npmjs.com/package/http-status): para referirme a los estados http a traves de mnemonicos
+  - [http-status](https://www.npmjs.com/package/http-status): para referenciar estados HTTP mediante sus nombres
   - [express-validator](https://www.npmjs.com/package/express-validator): para castear, validar y manejar errores de usuario
 
-## Desarrollo
+- El entorno de desarrollo usa herramientas de terminal para testear y validar la respuesta del API cada vez que cambiamos el codigo.
+  - [entr](https://github.com/eradman/entr) - ejecuta node y las pruebas cuando detecta cambios en los archivos de codigo
+  - [curlie](https://github.com/rs/curlie) - cliente http para la terminal
+  - [jq](https://github.com/jqlang/jq/) - lenguaje para interpretar y validar la respuesta JSON recibida
+  - Para ejecutar las pruebas usar: `$ make dev`
 
-- [entr](https://github.com/eradman/entr) - para relanzar node y las pruebas a la API
-- [curlie](https://github.com/rs/curlie) - cliente http para la terminal
-- [jq](https://github.com/jqlang/jq/) -
+## Descripcion
 
-## Referencias
+Ejemplo de un producto.
+
+``` json
+{
+    "id": 1,
+    "name": "8048",
+    "price": 133.7,
+    "categories": [
+      "microcontroller",
+      "dip"
+    ]
+}
+```
+
+## Objetivo
+## Uso del API
+
+### Description General
+
+| metodo | path http            | descripcion                                               |
+|--------|----------------------|-----------------------------------------------------------|
+| GET    | /api/products        | devuelve una lista de todos los productos                 |
+| POST   | /api/products        | crea un nuevo producto                                    |
+| GET    | /api/products/search | busca por productos que coincidan con los criterios dados |
+| GET    | /api/products/:id    | devuelve el producto pedido                               |
+| DELETE | /api/products/:id    | elimina el producto dado                                  |
+| PUT    | /api/products/:id    | actualiza el producto dado                                |
+| PATCH  | /api/products/:id    | actualiza un campo en el producto dado                    |
+
+### GET    /api/products
+### POST   /api/products
+### GET    /api/products/search
+### GET    /api/products/:id
+### DELETE /api/products/:id
+### PUT    /api/products/:id
+### PATCH  /api/products/:id
+
+## Materiales Y Recursos Adicionales
 
 - [Estados de respuesta HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status)
 - [Metodos HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods)
