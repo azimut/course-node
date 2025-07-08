@@ -8,7 +8,7 @@ import {
   validationResult,
 } from "express-validator";
 
-import * as controller from "../controllers/products.js";
+import * as controller from "../controllers/products.controller.js";
 
 const validateId = param("id").isInt().toInt();
 const validateProduct = [
