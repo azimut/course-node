@@ -1,6 +1,6 @@
 # proyecto-final-ecommerce
 
-**objetivo, descripcion y alcance del proyecto**
+**descripcion y alcance del proyecto**
 
 ## Instalación
 
@@ -14,7 +14,18 @@ $ npm install
 $ npm start
 ```
 
+| http path            | method | description                            |
+|----------------------|--------|----------------------------------------|
+| /api/products        | GET    | gets all products                      |
+| /api/products        | POST   | creates a new product                  |
+| /api/products/search | GET    | searchs                                |
+| /api/products/:id    | GET    | gets an existing product               |
+| /api/products/:id    | DELETE | deletes an existing product            |
+| /api/products/:id    | PUT    | updates an existing product            |
+| /api/products/:id    | PATCH  | updates a field on an existing product |
+
 ## Objetivo
+## Configuration
 ## Tecnologias
 
 - node.js
@@ -25,11 +36,10 @@ $ npm start
 
 ## Desarrollo
 
-- https://github.com/eradman/entr
-- https://github.com/rs/curlie
-- https://github.com/jqlang/jq/
+- [entr](https://github.com/eradman/entr) - para relanzar node y las pruebas a la API
+- [curlie](https://github.com/rs/curlie) - cliente http para la terminal
+- [jq](https://github.com/jqlang/jq/) -
 
-## Configuration
 ## Referencias
 
 - [Estados de respuesta HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status)
