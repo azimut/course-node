@@ -30,19 +30,29 @@ const exitOnError = (req, res, next) => {
 };
 
 const router = Router();
-router.get("/", controller.getProducts);
-router.get("/search", validateSearch, exitOnError, controller.searchProduct);
-router.get("/:id", validateId, exitOnError, controller.getProduct);
-router.delete("/:id", validateId, exitOnError, controller.deleteProduct);
+router.get("/products", controller.getProducts);
+router.get(
+  "/products/search",
+  validateSearch,
+  exitOnError,
+  controller.searchProduct
+);
+router.get("/products/:id", validateId, exitOnError, controller.getProduct);
+router.delete(
+  "/products/:id",
+  validateId,
+  exitOnError,
+  controller.deleteProduct
+);
 router.post(
-  "/",
+  "/products",
   validateProduct,
   checkExact(),
   exitOnError,
   controller.postProduct
 );
 router.put(
-  "/:id",
+  "/products/:id",
   validateId,
   validateProduct,
   checkExact(),
@@ -50,7 +60,7 @@ router.put(
   controller.putProduct
 );
 router.patch(
-  "/:id",
+  "/products/:id",
   validateId,
   oneOf(validateProduct),
   exitOnError,
