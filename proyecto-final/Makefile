@@ -28,12 +28,12 @@ test:
 	$(OK)      DELETE $(URL)/api/products/what                                               | jq -e
 	$(FAIL) -v GET    $(URL)/api/products/what                                               |& grep 404
 	$(FAIL) -v GET    $(URL)/api/products/1337                                               |& grep 404
-#	$(OK)      GET    $(URL)/api/products/search  name==555                                  | jq -e 'length == 1'
-#	$(OK)      GET    $(URL)/api/products/search  minPrice==99                               | jq -e 'length == 1'
-#	$(OK)      GET    $(URL)/api/products/search  maxPrice==99                               | jq -e 'length == 2'
-#	$(OK)      GET    $(URL)/api/products/search  maxPrice==1                                | jq -e 'length == 0'
-#	$(OK)      GET    $(URL)/api/products/search  category==cpu                              | jq -e 'length == 1'
-#	$(FAIL)    GET    $(URL)/api/products/search  foo==bar                                   | jq -e '.errors[0].msg'
+	$(OK)      GET    $(URL)/api/products/search  name==555                                  | jq -e 'length == 1'
+	$(OK)      GET    $(URL)/api/products/search  minPrice==99                               | jq -e 'length == 1'
+	$(OK)      GET    $(URL)/api/products/search  maxPrice==99                               | jq -e 'length == 2'
+	$(OK)      GET    $(URL)/api/products/search  maxPrice==1                                | jq -e 'length == 0'
+	$(OK)      GET    $(URL)/api/products/search  category==cpu                              | jq -e 'length == 1'
+	$(FAIL)    GET    $(URL)/api/products/search  foo==bar                                   | jq -e '.errors[0].msg'
 	$(OK)      PUT    $(URL)/api/products/80      name=Z80  price=8.0  categories:='["cpu"]' | jq -e
 	$(FAIL) -v PUT    $(URL)/api/products/80 bb=2 name=Z80  price=8.0  categories:='["cpu"]' |& grep 400
 	$(OK)      GET    $(URL)/api/products/80                                                 | jq -e '.price == 8.0'
