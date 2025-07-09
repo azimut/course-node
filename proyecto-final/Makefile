@@ -2,15 +2,17 @@
 .SUFFIXES:
 
 SHELL = /bin/bash -o pipefail
-USER ?= username
+MAIL ?= example@example.com
+PASS ?= qwerty
 URL  ?= :3030
-OK   := curlie -fsb jar.txt -c jar.txt
-FAIL := curlie  -sb jar.txt -c jar.txt
+OK   := curlie -fs
+FAIL := curlie  -s
 
 .PHONY: test
 test:
+#	$(eval TOKEN = $(shell curlie -s POST $(URL)/auth/login email=$(MAIL) password=$(PASS) | jq .token))
+#	echo $(TOKEN)
 	curlie -s  GET    $(URL)/notfound                                                        | jq -e '.error'
-#	$(OK)      POST   $(URL)/auth/login          user=$(USER)
 	$(OK)      GET    $(URL)/api/products                                                    | jq -e 'length > 0'
 	$(OK)      POST   $(URL)/api/products        name=6502 price=650.2 categories:='["cpu"]' | jq -e '.id'
 	$(FAIL) -v POST   $(URL)/api/products buzz=2 name=6502 price=650.2 categories:='["cpu"]' |& grep 400
