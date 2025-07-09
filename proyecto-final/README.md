@@ -46,9 +46,9 @@ Ejemplo de un producto.
 ## Objetivo
 ## Uso del API
 
-### Description General
+### Descripcion General
 
-| metodo | path http            | descripcion                                               |
+| metodo | ruta                 | descripcion                                               |
 |--------|----------------------|-----------------------------------------------------------|
 | GET    | /api/products        | devuelve una lista de todos los productos                 |
 | POST   | /api/products        | crea un nuevo producto                                    |
