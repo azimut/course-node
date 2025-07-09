@@ -14,8 +14,9 @@ FAIL  = curlie  -s --oauth2-bearer $(TOKEN)
 .PHONY: test
 test:
 	$(eval TOKEN = $(shell curlie -s POST $(URL)/auth/login email=$(EMAIL) password=$(PASS) | jq .token))
-	echo $(TOKEN)
+	@echo "Token: "$(TOKEN)
 	curlie -s  GET    $(URL)/notfound                                                        | jq -e '.error'
+	curlie -sv GET    $(URL)/api/products                                                    |& grep 401
 	$(OK)      GET    $(URL)/api/products                                                    | jq -e 'length > 0'
 	$(OK)      POST   $(URL)/api/products        name=6502 price=650.2 categories:='["cpu"]' | jq -e '.id'
 	$(FAIL) -v POST   $(URL)/api/products buzz=2 name=6502 price=650.2 categories:='["cpu"]' |& grep 400
