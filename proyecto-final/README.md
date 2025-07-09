@@ -62,6 +62,29 @@ Ejemplo de un producto.
 | PATCH  | /api/products/:id    | actualiza un campo en el producto dado                    |
 
 ### POST   /auth/login
+
+``` http
+POST /auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "user@email.com",
+    "password": "stronPass123"
+}
+```
+
+``` http
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: *
+Content-Length: 183
+Content-Type: application/json; charset=utf-8
+X-Powered-By: Express
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ1c2VyQGVtYWlsLmNvbSIsImlhdCI6MTc1MjA3MDk0OCwiZXhwIjoxNzUyMDc0NTQ4fQ.JhBE_6zGnDkR_lPbYpBXO5l1UXR-VOY-AeCCUrMp4eA"
+}
+```
+
 ### GET    /api/products
 ### POST   /api/products
 ### GET    /api/products/search
