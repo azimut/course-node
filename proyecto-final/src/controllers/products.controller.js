@@ -32,7 +32,7 @@ export async function postProduct(req, res) {
 
 export async function putProduct(req, res) {
   const product = await model.getProduct(req.params.id);
-  await model.setProduct({ ...product, ...req.body });
+  await model.setProduct({ id: req.params.id, ...product, ...req.body });
   res.status(product ? http.NO_CONTENT : http.CREATED).send();
 }
 

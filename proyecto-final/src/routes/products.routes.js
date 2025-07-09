@@ -4,7 +4,7 @@ import { body, param, query, oneOf, checkExact } from "express-validator";
 
 import * as controller from "../controllers/products.controller.js";
 
-const validateId = param("id").isInt().toInt();
+const validateId = param("id").isAlphanumeric();
 const validateProduct = [
   body("name").isAlphanumeric(),
   body("categories").isArray(),

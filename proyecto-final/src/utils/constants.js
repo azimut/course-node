@@ -7,3 +7,7 @@ export const default_user = {
   email: "user@email.com",
   password: "stronPass123",
 };
+export const apiKey = process.env.FIREBASE_API_KEY;
+export const authDomain = process.env.FIREBASE_AUTH_DOMAIN;
+export const storageBucket = process.env.FIREBASE_STORAGE_BUCKET;
+export const appId = process.env.FIREBASE_APP_ID;

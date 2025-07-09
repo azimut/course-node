@@ -1,40 +1,42 @@
-import path from "node:path";
-import fs from "node:fs/promises";
+import {
+  collection,
+  doc,
+  getDocs,
+  getDoc,
+  addDoc,
+  setDoc,
+  deleteDoc,
+} from "firebase/firestore";
+import { db } from "../data/data.js";
 
-const productsFilename = path.join(
-  import.meta.dirname,
-  "..",
-  "..",
-  "data",
-  "products.json"
-);
+const productsCollection = collection(db, "products");
 
 export async function getProducts() {
-  return fs.readFile(productsFilename, { encoding: "utf8" }).then(JSON.parse);
+  const snapshot = await getDocs(productsCollection);
+  const products = [];
+  snapshot.forEach((doc) => products.push({ id: doc.id, ...doc.data() }));
+  return products;
 }
 
 export async function getProduct(id) {
-  return getProducts().then((ps) => ps.find((p) => p.id === id));
+  const productDoc = await getDoc(doc(productsCollection, id));
+  if (productDoc.exists()) return { id, ...productDoc.data() };
 }
 
 export async function deleteProduct(id) {
-  const products = await getProducts();
-  const filtered = products.filter((p) => p.id !== id);
-  await setProducts(filtered);
+  await deleteDoc(doc(productsCollection, id));
 }
 
 export async function setProduct(product) {
-  await deleteProduct(product.id);
-  const products = await getProducts();
-  products.push(product);
-  await setProducts(products);
+  const { id, name, price, categories } = product;
+  await setDoc(doc(productsCollection, id), { name, price, categories });
   return product;
 }
 
 export async function addNewProduct(product) {
-  return getProducts().then((products) => {
-    setProduct({ id: products.length + 1, ...product });
-  });
+  const createdProduct = await addDoc(productsCollection, product);
+  product.id = createdProduct.id;
+  return product;
 }
 
 export async function searchProduct({ name, category, minPrice, maxPrice }) {
@@ -44,8 +46,4 @@ export async function searchProduct({ name, category, minPrice, maxPrice }) {
   if (minPrice) result = result.filter((p) => p.price > minPrice);
   if (maxPrice) result = result.filter((p) => p.price < maxPrice);
   return result;
-}
-
-async function setProducts(products) {
-  await fs.writeFile(productsFilename, JSON.stringify(products));
 }
