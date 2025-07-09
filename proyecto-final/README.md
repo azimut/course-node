@@ -20,6 +20,8 @@ $ npm start
   - [cors](https://www.npmjs.com/package/cors): para configurar CORS headers
   - [http-status](https://www.npmjs.com/package/http-status): para referenciar estados HTTP mediante sus nombres
   - [express-validator](https://www.npmjs.com/package/express-validator): para castear, validar y manejar errores de usuario
+  - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+  - [dotenv](https://www.npmjs.com/package/dotenv)
 
 - El entorno de desarrollo usa herramientas de terminal para testear y validar la respuesta del API cada vez que cambiamos el codigo.
   - [entr](https://github.com/eradman/entr) - ejecuta node y las pruebas cuando detecta cambios en los archivos de codigo
@@ -50,6 +52,7 @@ Ejemplo de un producto.
 
 | metodo | ruta                 | descripcion                                               |
 |--------|----------------------|-----------------------------------------------------------|
+| POST   | /auth/login          | given credentials, returns a JWT token                    |
 | GET    | /api/products        | devuelve una lista de todos los productos                 |
 | POST   | /api/products        | crea un nuevo producto                                    |
 | GET    | /api/products/search | busca por productos que coincidan con los criterios dados |
@@ -58,6 +61,7 @@ Ejemplo de un producto.
 | PUT    | /api/products/:id    | actualiza el producto dado                                |
 | PATCH  | /api/products/:id    | actualiza un campo en el producto dado                    |
 
+### POST   /auth/login
 ### GET    /api/products
 ### POST   /api/products
 ### GET    /api/products/search
