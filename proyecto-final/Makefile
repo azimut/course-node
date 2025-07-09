@@ -1,17 +1,20 @@
 .POSIX:
 .SUFFIXES:
-
 SHELL = /bin/bash -o pipefail
-MAIL ?= example@example.com
-PASS ?= qwerty
-URL  ?= :3030
-OK   := curlie -fs
-FAIL := curlie  -s
+
+EMAIL ?= user@email.com
+PASS  ?= stronPass123
+
+URL   ?= :3030
+
+TOKEN = invalid
+OK    = curlie -fs --oauth2-bearer $(TOKEN)
+FAIL  = curlie  -s --oauth2-bearer $(TOKEN)
 
 .PHONY: test
 test:
-#	$(eval TOKEN = $(shell curlie -s POST $(URL)/auth/login email=$(MAIL) password=$(PASS) | jq .token))
-#	echo $(TOKEN)
+	$(eval TOKEN = $(shell curlie -s POST $(URL)/auth/login email=$(EMAIL) password=$(PASS) | jq .token))
+	echo $(TOKEN)
 	curlie -s  GET    $(URL)/notfound                                                        | jq -e '.error'
 	$(OK)      GET    $(URL)/api/products                                                    | jq -e 'length > 0'
 	$(OK)      POST   $(URL)/api/products        name=6502 price=650.2 categories:='["cpu"]' | jq -e '.id'

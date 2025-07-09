@@ -1,12 +1,6 @@
 import { Router } from "express";
-import {
-  body,
-  param,
-  query,
-  oneOf,
-  checkExact,
-  validationResult,
-} from "express-validator";
+import { exitOnError } from "../middlewares/validator.js";
+import { body, param, query, oneOf, checkExact } from "express-validator";
 
 import * as controller from "../controllers/products.controller.js";
 
@@ -22,12 +16,6 @@ const validateSearch = oneOf([
   query("minPrice").isNumeric().toFloat(),
   query("maxPrice").isNumeric().toFloat(),
 ]);
-const exitOnError = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty())
-    return res.status(400).json({ errors: errors.array() });
-  next();
-};
 
 const router = Router();
 router.get("/products", controller.getProducts);
