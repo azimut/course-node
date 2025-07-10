@@ -1,15 +1,45 @@
 # proyecto-final-ecommerce
 
-Este proyecto implementa un ejemplo de una REST API en Node.js (Express). Usando JWT para autenticacion. Y Firestore para persistencia. Desplegado en Vercel.
+Este proyecto implementa una API REST en `Node.js` usando `Express`. Cuenta con autenticacion mediante `JWT` tokens. `Firestore` para persistencia. Y esta desplegada en `Vercel` en la siguiente direccion: https://course-node-azimut1s-projects.vercel.app/
 
 ## Instalacion y despliege local
 
-Instalacion de las dependencias necesarias, edicion de las credenciales de Firebase (nuestra base de datos), y lanzamiento el servidor.
-
+1. Instalacion de las dependencias necesarias.
 ``` shellsession
 $ npm install
+```
+
+2. Edicion de las credenciales de Firebase.
+``` shellsession
 $ nano .env
+PORT=3030
+JWT_SECRET_KEY=...
+FIREBASE_API_KEY=...
+FIREBASE_AUTH_DOMAIN=...
+FIREBASE_STORAGE_BUCKET=...
+FIREBASE_APP_ID=...
+```
+
+3. Lanzamiento del servidor.
+``` shellsession
 $ npm start
+```
+
+4. Ejecutamos pruebas a la API local.
+
+``` shellsession
+$ make test
+```
+
+5. Ejecutamos las pruebas a la API remota.
+
+``` shellsession
+$ make test URL=https://course-node-azimut1s-projects.vercel.app
+```
+
+6. Alternativamente, podemos lanzar el servidor en modo desarrollo. Que integra la recarga del servidor y el testeo continuo.
+``` shellsession
+$ make dev
 ```
 
 ## Tecnologias usadas
@@ -22,18 +52,17 @@ $ npm start
   - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
   - [dotenv](https://www.npmjs.com/package/dotenv)
 
-- El entorno de desarrollo usa herramientas de terminal para testear y validar la respuesta del API cada vez que cambiamos el codigo.
-  - [entr](https://github.com/eradman/entr) - ejecuta node y las pruebas cuando detecta cambios en los archivos de codigo
+- El entorno de desarrollo usa herramientas de consola para testear y validar la respuestas del API. Triggereado por cambiamos en el codigo.
+  - [Make](https://www.gnu.org/software/make/manual/make.html) - lenguaje de scripting usado para lanzar cada comando de prueba
+  - [entr](https://github.com/eradman/entr) - ejecuta node junto con las pruebas de API en cada cambio de codigo
   - [curlie](https://github.com/rs/curlie) - cliente http para la terminal
-  - [jq](https://github.com/jqlang/jq/) - lenguaje para interpretar y validar la respuesta JSON recibida
-  - Para ejecutar las pruebas usar: `$ make dev`
+  - [jq](https://github.com/jqlang/jq/) - lenguaje para interpretar y validar la respuestas JSON recibidas
 
-## Descripcion
+## Descripcion de la implementacion
 
-La REST API implementada en este proyecto. 
+La API REST implementada en este proyecto es una simple API que mantiene un inventario de productos. Cada uno con su precio y perteneciente a una categoria.
 
-Ejemplo de un producto.
-
+Ejemplo de un producto:
 ``` json
 {
     "id": "Tlp6Q1FzQiiVw08hnCFy",
@@ -46,14 +75,11 @@ Ejemplo de un producto.
 },
 ```
 
-## Objetivo
 ## Uso del API
-
-### Descripcion General
 
 | metodo | ruta                 | descripcion                                               |
 |--------|----------------------|-----------------------------------------------------------|
-| POST   | /auth/login          | given credentials, returns a JWT token                    |
+| POST   | /auth/login          | dado credenciales, devuelve un token JWT                    |
 | GET    | /api/products        | devuelve una lista de todos los productos                 |
 | POST   | /api/products        | crea un nuevo producto                                    |
 | GET    | /api/products/search | busca por productos que coincidan con los criterios dados |
@@ -79,7 +105,6 @@ HTTP/1.1 200 OK
 Access-Control-Allow-Origin: *
 Content-Length: 183
 Content-Type: application/json; charset=utf-8
-X-Powered-By: Express
 
 {
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ1c2VyQGVtYWlsLmNvbSIsImlhdCI6MTc1MjA3MDk0OCwiZXhwIjoxNzUyMDc0NTQ4fQ.JhBE_6zGnDkR_lPbYpBXO5l1UXR-VOY-AeCCUrMp4eA"
@@ -90,12 +115,11 @@ X-Powered-By: Express
 
 ``` http
 GET /api/products HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ1c2VyQGVtYWlsLmNvbSIsImlhdCI6MTc1MjA3MTIxOSwiZXhwIjoxNzUyMDc0ODE5fQ.TkJAQtPRACfog35QW1WD6ym5RkPLdElP1ZyYCoOalTs
+Authorization: Bearer eyJhbGciOi....YCoOalTs
 ```
 
 ``` http
 HTTP/1.1 200 OK
-X-Powered-By: Express
 Access-Control-Allow-Origin: *
 Content-Type: application/json; charset=utf-8
 
@@ -115,11 +139,42 @@ Content-Type: application/json; charset=utf-8
 ```
 
 ### POST   /api/products
+
+``` http
+POST /api/products HTTP/2
+authorization: Bearer eyJjda...WhvAXM
+content-type: application/json
+
+{
+    "categories": [
+        "cpu"
+    ],
+    "name": "6502",
+    "price": "650.2"
+}
+
+```
+
+``` http
+HTTP/2 201
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+
+{
+    "categories": [
+        "cpu"
+    ],
+    "name": "6502",
+    "price": 650.2,
+    "id": "M4rBiczs0emKNzIgbqwU"
+}
+```
+
 ### GET    /api/products/search
 
 ``` http
 GET /api/products/search?name=555 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ1c2VyQGVtYWlsLmNvbSIsImlhdCI6MTc1MjA3MTYzMSwiZXhwIjoxNzUyMDc1MjMxfQ.lSFuT1lP_cuMofAE7i1JgoxFCyLNT1AYRhMWEVlntFY
+Authorization: Bearer eyJhbGciOiJI....T1AYRhMWEVlntFY
 ```
 
 ``` http
@@ -146,7 +201,7 @@ Content-Type: application/json; charset=utf-8
 
 ``` http
 GET /api/products/zZPkuHOndxqXglZQnTvy HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ1c2VyQGVtYWlsLmNvbSIsImlhdCI6MTc1MjA3MTc1MywiZXhwIjoxNzUyMDc1MzUzfQ.rf8v7WXnkWB6LUBap0xjcdNt2aaDs7MX2Sui9ykJYrQ
+Authorization: Bearer eyJhbGciOi....s7MX2Sui9ykJYrQ
 ```
 
 ``` http
@@ -171,7 +226,7 @@ Content-Type: application/json; charset=utf-8
 
 ``` http
 DELETE /api/products/zZPkuHOndxqXglZQ HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ1c2VyQGVtYWlsLmNvbSIsImlhdCI6MTc1MjA3MjA2MCwiZXhwIjoxNzUyMDc1NjYwfQ.BwtZFDABgyOX3P-QL-lyTw7aCFlsx4Ex-EoedwSPrGU
+Authorization: Bearer eyJhbGci....x4Ex-EoedwSPrGU
 ```
 
 ``` http
@@ -181,7 +236,43 @@ X-Powered-By: Express
 ```
 
 ### PUT    /api/products/:id
+
+``` http
+PUT /api/products/M4rBiczs0emKNzIgbqwU HTTP/2
+authorization: Bearer eyJhbGciOiJIUzI1....yKUACDWhvAXM
+content-type: application/json
+
+{
+    "categories": [
+        "cpu"
+    ],
+    "name": "6502C",
+    "price": "650.2"
+}
+```
+
+``` http
+HTTP/2 204
+access-control-allow-origin: *
+```
+
 ### PATCH  /api/products/:id
+
+``` http
+PATCH /api/products/M4rBiczs0emKNzIgbqwU HTTP/2
+authorization: Bearer eyJhbG.....SYmyKUACDWhvAXM
+content-type: application/json
+
+{
+    "price": "65.02"
+}
+```
+
+``` http
+HTTP/2 204
+access-control-allow-origin: *
+```
+
 ## Materiales Y Recursos Adicionales
 
 - [Estados de respuesta HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status)
