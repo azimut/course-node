@@ -5,42 +5,40 @@ Este proyecto implementa una API REST en `Node.js` usando `Express`. Cuenta con 
 ## Instalacion y despliege local
 
 1. Instalacion de las dependencias necesarias.
-``` shellsession
-$ npm install
-```
+  ``` shellsession
+  $ npm install
+  ```
 
 2. Edicion de las credenciales de Firebase.
-``` shellsession
-$ nano .env
-PORT=3030
-JWT_SECRET_KEY=...
-FIREBASE_API_KEY=...
-FIREBASE_AUTH_DOMAIN=...
-FIREBASE_STORAGE_BUCKET=...
-FIREBASE_APP_ID=...
-```
+  ``` shellsession
+  $ nano .env
+  PORT=3030
+  JWT_SECRET_KEY=...
+  FIREBASE_API_KEY=...
+  FIREBASE_AUTH_DOMAIN=...
+  FIREBASE_STORAGE_BUCKET=...
+  FIREBASE_APP_ID=...
+  ```
 
 3. Lanzamiento del servidor.
-``` shellsession
-$ npm start
-```
+  ``` shellsession
+  $ npm start
+  ```
 
-4. Ejecutamos pruebas a la API local.
+4. Para realizar pruebas a la API local.
+  ``` shellsession
+  $ make test
+  ```
 
-``` shellsession
-$ make test
-```
+5. Para realizar las pruebas a una API remota.
+  ``` shellsession
+  $ make test URL=https://course-node-azimut1s-projects.vercel.app
+  ```
 
-5. Ejecutamos las pruebas a la API remota.
-
-``` shellsession
-$ make test URL=https://course-node-azimut1s-projects.vercel.app
-```
-
-6. Alternativamente, podemos lanzar el servidor en modo desarrollo. Que integra la recarga del servidor y el testeo continuo.
-``` shellsession
-$ make dev
-```
+6. Alternativamente, podemos lanzar el servidor en modo **desarrollo**. Que integra la recarga del servidor y el testeo continuo.
+  ``` shellsession
+  $ make dev
+  ```
 
 ## Tecnologias usadas
 
@@ -52,7 +50,7 @@ $ make dev
   - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
   - [dotenv](https://www.npmjs.com/package/dotenv)
 
-- El entorno de desarrollo usa herramientas de consola para testear y validar la respuestas del API. Triggereado por cambiamos en el codigo.
+- El entorno de **desarrollo** usa herramientas de consola para testear y validar la respuestas del API. Triggereado por cambiamos en el codigo.
   - [Make](https://www.gnu.org/software/make/manual/make.html) - lenguaje de scripting usado para lanzar cada comando de prueba
   - [entr](https://github.com/eradman/entr) - ejecuta node junto con las pruebas de API en cada cambio de codigo
   - [curlie](https://github.com/rs/curlie) - cliente http para la terminal
