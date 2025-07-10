@@ -10,35 +10,35 @@ Este proyecto implementa una API REST en `Node.js` usando `Express`. Cuenta con 
    ```
 
 2. Edicion de las credenciales de Firebase.
-        ``` shellsession
-        $ nano .env
-        PORT=3030
-        JWT_SECRET_KEY=...
-        FIREBASE_API_KEY=...
-        FIREBASE_AUTH_DOMAIN=...
-        FIREBASE_STORAGE_BUCKET=...
-        FIREBASE_APP_ID=...
-        ```
+   ``` shellsession
+   $ nano .env
+   PORT=3030
+   JWT_SECRET_KEY=...
+   FIREBASE_API_KEY=...
+   FIREBASE_AUTH_DOMAIN=...
+   FIREBASE_STORAGE_BUCKET=...
+   FIREBASE_APP_ID=...
+   ```
 
 3. Lanzamiento del servidor.
-  ``` shellsession
-  $ npm start
-  ```
+   ``` shellsession
+   $ npm start
+   ```
 
 4. Para realizar pruebas a la API local.
-  ``` shellsession
-  $ make test
-  ```
+   ``` shellsession
+   $ make test
+   ```
 
 5. Para realizar las pruebas a una API remota.
-  ``` shellsession
-  $ make test URL=https://course-node-azimut1s-projects.vercel.app
-  ```
+   ``` shellsession
+   $ make test URL=https://course-node-azimut1s-projects.vercel.app
+   ```
 
 6. Alternativamente, podemos lanzar el servidor en modo **desarrollo**. Que integra la recarga del servidor y el testeo continuo.
-  ``` shellsession
-  $ make dev
-  ```
+   ``` shellsession
+   $ make dev
+   ```
 
 ## Tecnologias usadas
 
