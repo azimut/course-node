@@ -13,9 +13,7 @@ const productsCollection = collection(db, "products");
 
 export async function getProducts() {
   const snapshot = await getDocs(productsCollection);
-  const products = [];
-  snapshot.forEach((doc) => products.push({ id: doc.id, ...doc.data() }));
-  return products;
+  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 }
 
 export async function getProduct(id) {
