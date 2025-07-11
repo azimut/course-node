@@ -77,9 +77,9 @@ Ejemplo de un producto:
 
 | metodo | ruta                 | descripcion                                               |
 |--------|----------------------|-----------------------------------------------------------|
-| POST   | /auth/login          | dado credenciales, devuelve un token JWT                    |
+| POST   | /auth/login          | dado credenciales, devuelve un token JWT                  |
 | GET    | /api/products        | devuelve una lista de todos los productos                 |
-| POST   | /api/products        | crea un nuevo producto                                    |
+| POST   | /api/products/create | crea un nuevo producto                                    |
 | GET    | /api/products/search | busca por productos que coincidan con los criterios dados |
 | GET    | /api/products/:id    | devuelve el producto pedido                               |
 | DELETE | /api/products/:id    | elimina el producto dado                                  |
@@ -136,10 +136,10 @@ Content-Type: application/json; charset=utf-8
 
 ```
 
-### POST   /api/products
+### POST   /api/products/create
 
 ``` http
-POST /api/products HTTP/2
+POST /api/products/create HTTP/2
 authorization: Bearer eyJjda...WhvAXM
 content-type: application/json
 

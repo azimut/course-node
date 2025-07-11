@@ -33,7 +33,7 @@ router.delete(
   controller.deleteProduct
 );
 router.post(
-  "/products",
+  "/products/create",
   validateProduct,
   checkExact(),
   exitOnError,
