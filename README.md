@@ -45,10 +45,11 @@ Este proyecto implementa una API REST en `Node.js` usando `Express`. Cuenta con 
 - node.js
   - [express](https://www.npmjs.com/package/express): como web framework
   - [cors](https://www.npmjs.com/package/cors): para configurar CORS headers
-  - [http-status](https://www.npmjs.com/package/http-status): para referenciar estados HTTP mediante sus nombres
   - [express-validator](https://www.npmjs.com/package/express-validator): para castear, validar y manejar errores de usuario
   - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
   - [dotenv](https://www.npmjs.com/package/dotenv)
+  - [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express): para documentar y exponer la API para desarrolladores.
+  - [swagger-autogen](swagger-autogen): para autogenerar el la documentacion de la API.
 
 - El entorno de **desarrollo** usa herramientas de consola para testear y validar la respuestas del API. Triggereado por cambiamos en el codigo.
   - [Make](https://www.gnu.org/software/make/manual/make.html) - lenguaje de scripting usado para lanzar cada comando de prueba

@@ -1,4 +1,3 @@
-import http from "http-status";
 import * as model from "../models/products.js";
 
 export async function getProducts(_req, res) {
@@ -11,42 +10,49 @@ export async function getProduct(req, res) {
   if (product) {
     res.json(product);
   } else {
-    res.status(http.NOT_FOUND).json({});
+    res.status(404).json({});
   }
 }
 
 export async function searchProduct(req, res) {
-  const search = await model.searchProduct(req.query);
+  const { name, category, minPrice, maxPrice } = req.query;
+  const search = await model.searchProduct({
+    name,
+    category,
+    minPrice,
+    maxPrice,
+  });
   res.json(search);
 }
 
 export async function deleteProduct(req, res) {
   await model.deleteProduct(req.params.id);
-  res.status(http.NO_CONTENT).send();
+  res.status(204).send();
 }
 
 export async function deleteProducts(_req, res) {
   await model.deleteProducts();
-  res.status(http.NO_CONTENT).send();
+  res.status(204).send();
 }
 
 export async function postProduct(req, res) {
-  const product = await model.addNewProduct(req.body);
-  res.status(http.CREATED).json(product);
+  // #swagger.parameters['body'] = {  in: 'body', schema: { $ref: '#/definitions/AddProduct' } }
+  const product = await model.addNewProduct(...req.body);
+  res.status(201).json(product);
 }
 
 export async function putProduct(req, res) {
   const product = await model.getProduct(req.params.id);
   await model.setProduct({ id: req.params.id, ...product, ...req.body });
-  res.status(product ? http.NO_CONTENT : http.CREATED).send();
+  res.status(product ? 204 : 201).send();
 }
 
 export async function patchProduct(req, res) {
   const product = await model.getProduct(req.params.id);
   if (product) {
     await model.setProduct({ ...product, ...req.body });
-    res.status(http.NO_CONTENT).send();
+    res.status(204).send();
   } else {
-    res.status(http.NOT_FOUND).json({});
+    res.status(404).json({});
   }
 }
