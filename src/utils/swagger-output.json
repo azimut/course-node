@@ -6,10 +6,6 @@
     "version": "1.0.0"
   },
   "basePath": "/",
-  "schemes": [
-    "https",
-    "http"
-  ],
   "paths": {
     "/auth/login": {
       "post": {

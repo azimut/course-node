@@ -285,3 +285,4 @@ access-control-allow-origin: *
 - Para saber que version de Node usar en el desarrollo.
   - https://vercel.com/docs/functions/runtimes/node-js/node-js-versions
   - https://render.com/docs/node-version#history-of-default-nodejs-versions
+- https://swagger.io/docs/specification/v2_0/api-host-and-base-path/
