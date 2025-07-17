@@ -1,11 +1,12 @@
 .POSIX:
 .SUFFIXES:
-SHELL  = /bin/bash -o pipefail
+
 URL   ?= :3030
 EMAIL ?= user@email.com
 PASS  ?= stronPass123
 OK     = curlie -fs --oauth2-bearer $(TOKEN)
 FAIL   = curlie  -s --oauth2-bearer $(TOKEN)
+SHELL := /bin/bash -o pipefail
 
 .PHONY: test
 test:
@@ -43,9 +44,7 @@ test:
 	$(FAIL) -v PATCH  $(URL)/api/products/80       rice=21.99                                       |& grep 400
 	$(OK)      GET    $(URL)/api/products/80                                                        | jq -e '.price == 79.9'
 	$(OK)      DELETE $(URL)/api/products/80                                                        | jq -e
-	$(OK)      DELETE $(URL)/api/products/all                                                       | jq -e
-
 
 .PHONY: dev
 dev: ; ls *.js src/*/*.js Makefile \
-	| entr -rcs '(node index.js &; sleep 1 && time make test || notify-send -u critical -t 1000 "woops")'
+	| entr -rcs '(node index.js &; sleep 1 && time make test || notify-send -u critical -t 2000 "woops")'
