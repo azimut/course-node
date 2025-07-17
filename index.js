@@ -5,13 +5,15 @@ import { port } from "./src/utils/constants.js";
 import { requireAuth } from "./src/middlewares/authentication.js";
 import productsRoute from "./src/routes/products.routes.js";
 import authRoute from "./src/routes/auth.routes.js";
+import docsRoute from "./src/routes/docs.routes.cjs";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use("/api", requireAuth, productsRoute);
+app.use("/", docsRoute);
 app.use("/auth", authRoute);
+app.use("/api", requireAuth, productsRoute);
 app.use((_req, res) =>
   res.status(http.NOT_FOUND).json({ error: http[http.NOT_FOUND] })
 );

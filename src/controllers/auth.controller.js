@@ -1,15 +1,14 @@
-import http from "http-status";
-
 import { generateToken } from "../utils/token-generator.js";
 import { default_user } from "../utils/constants.js";
 
 export function login(req, res) {
+  // #swagger.parameters['body'] = {  in: 'body', schema: { $ref: '#/definitions/SampleLogin' } }
   const { email, password } = req.body;
   const authenticatedId = authenticate({ email, password });
   if (authenticatedId) {
     res.json({ token: generateToken({ id: authenticatedId, email }) });
   } else {
-    res.status(http.UNAUTHORIZED).json({ error: "Invalid credentials." });
+    res.status(401).json({ error: "Invalid credentials." });
   }
 }
 
