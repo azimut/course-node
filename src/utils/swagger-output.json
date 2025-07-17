@@ -7,6 +7,7 @@
   },
   "basePath": "/",
   "schemes": [
+    "https",
     "http"
   ],
   "paths": {
@@ -268,9 +269,5 @@
         "categories"
       ]
     }
-  },
-  "methods": [
-    "https",
-    "http"
-  ]
+  }
 }
