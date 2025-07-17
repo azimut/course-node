@@ -1,14 +1,11 @@
 .POSIX:
 .SUFFIXES:
-SHELL = /bin/bash -o pipefail
-
+SHELL  = /bin/bash -o pipefail
+URL   ?= :3030
 EMAIL ?= user@email.com
 PASS  ?= stronPass123
-
-URL   ?= :3030
-
-OK    = curlie -fs --oauth2-bearer $(TOKEN)
-FAIL  = curlie  -s --oauth2-bearer $(TOKEN)
+OK     = curlie -fs --oauth2-bearer $(TOKEN)
+FAIL   = curlie  -s --oauth2-bearer $(TOKEN)
 
 .PHONY: test
 test:
@@ -28,7 +25,6 @@ test:
 	$(OK)      GET    $(URL)/api/products                                                           | jq -e 'length == 3'
 
 	$(FAIL) -v POST   $(URL)/api/products/create buzz=2 name=6502 price=650.2 categories:='["cpu"]' |& grep 400
-
 	$(OK)      DELETE $(URL)/api/products/what                                                      | jq -e
 	$(FAIL) -v GET    $(URL)/api/products/what                                                      |& grep 404
 	$(FAIL) -v GET    $(URL)/api/products/1337                                                      |& grep 404
