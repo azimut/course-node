@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "swagger": "node src/utils/swagger.js"
+    "swagger": "node src/utils/swagger.js; sed -i '/\"host\"/d' src/utils/swagger-output.json"
   },
   "keywords": [],
   "author": "azimut <azimut.github@protonmail.com> (https://github.com/azimut)",

@@ -5,7 +5,6 @@
     "description": "Una simple API REST de productos usando express.js.",
     "version": "1.0.0"
   },
-  "host": "localhost:3030",
   "basePath": "/",
   "schemes": [
     "http"

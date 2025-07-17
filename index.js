@@ -11,8 +11,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use("/", docsRoute);
 app.use("/auth", authRoute);
+app.use("/api/docs", docsRoute);
 app.use("/api", requireAuth, productsRoute);
 app.use((_req, res) =>
   res.status(http.NOT_FOUND).json({ error: http[http.NOT_FOUND] })
