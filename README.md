@@ -46,10 +46,10 @@ Este proyecto implementa una API REST en `Node.js` usando `Express`. Cuenta con 
   - [express](https://www.npmjs.com/package/express): como web framework
   - [cors](https://www.npmjs.com/package/cors): para configurar CORS headers
   - [express-validator](https://www.npmjs.com/package/express-validator): para castear, validar y manejar errores de usuario
-  - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
-  - [dotenv](https://www.npmjs.com/package/dotenv)
+  - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken): para generar y validar tokens JWT
+  - [dotenv](https://www.npmjs.com/package/dotenv): para almacenar y obtener las credenciales de Firebase
   - [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express): para documentar y exponer la API para desarrolladores.
-  - [swagger-autogen](swagger-autogen): para autogenerar el la documentacion de la API.
+  - [swagger-autogen](swagger-autogen): para autogenerar la documentacion
 
 - El entorno de **desarrollo** usa herramientas de consola para testear y validar la respuestas del API. Triggereado por cambiamos en el codigo.
   - [Make](https://www.gnu.org/software/make/manual/make.html) - lenguaje de scripting usado para lanzar cada comando de prueba
@@ -75,6 +75,8 @@ Ejemplo de un producto:
 ```
 
 ## Uso del API
+
+Documentacion Swagger online: https://course-node.vercel.app/api/docs/
 
 | metodo | ruta                 | descripcion                                               |
 |--------|----------------------|-----------------------------------------------------------|
