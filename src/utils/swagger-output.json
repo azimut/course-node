@@ -268,5 +268,9 @@
         "categories"
       ]
     }
-  }
+  },
+  "methods": [
+    "https",
+    "http"
+  ]
 }

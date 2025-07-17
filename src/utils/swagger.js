@@ -7,6 +7,7 @@ const doc = {
     description: "Una simple API REST de productos usando express.js.",
   },
   host: `localhost:${port}`,
+  methods: ["https", "http"],
   definitions: {
     SampleLogin: {
       $email: default_user.email,
