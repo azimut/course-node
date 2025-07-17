@@ -1,0 +1,27 @@
+[
+  {
+    "name": "8048",
+    "price": 133.7,
+    "categories": [
+      "microcontroller",
+      "dip"
+    ]
+  },
+  {
+    "name": "Z80",
+    "price": 80,
+    "categories": [
+      "cpu",
+      "dip"
+    ]
+  },
+  {
+    "name": "555",
+    "price": 5.55,
+    "categories": [
+      "dip",
+      "timer",
+      "sop"
+    ]
+  }
+]

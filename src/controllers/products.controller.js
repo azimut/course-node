@@ -25,6 +25,11 @@ export async function deleteProduct(req, res) {
   res.status(http.NO_CONTENT).send();
 }
 
+export async function deleteProducts(_req, res) {
+  await model.deleteProducts();
+  res.status(http.NO_CONTENT).send();
+}
+
 export async function postProduct(req, res) {
   const product = await model.addNewProduct(req.body);
   res.status(http.CREATED).json(product);

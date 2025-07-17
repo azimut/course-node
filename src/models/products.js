@@ -25,6 +25,11 @@ export async function deleteProduct(id) {
   await deleteDoc(doc(productsCollection, id));
 }
 
+export async function deleteProducts() {
+  const products = await getProducts();
+  products.forEach(async (p) => await deleteProduct(p.id));
+}
+
 export async function setProduct(product) {
   const { id, name, price, categories } = product;
   await setDoc(doc(productsCollection, id), { name, price, categories });

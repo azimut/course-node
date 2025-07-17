@@ -26,6 +26,7 @@ router.get(
   controller.searchProduct
 );
 router.get("/products/:id", validateId, exitOnError, controller.getProduct);
+router.delete("/products/all", controller.deleteProducts);
 router.delete(
   "/products/:id",
   validateId,
