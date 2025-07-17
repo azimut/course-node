@@ -37,7 +37,7 @@ export async function deleteProducts(_req, res) {
 
 export async function postProduct(req, res) {
   // #swagger.parameters['body'] = {  in: 'body', schema: { $ref: '#/definitions/AddProduct' } }
-  const product = await model.addNewProduct(...req.body);
+  const product = await model.addNewProduct(req.body);
   res.status(201).json(product);
 }
 
