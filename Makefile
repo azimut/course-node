@@ -47,8 +47,8 @@ test:
 
 .PHONY: dev
 dev: ; ls *.js src/*/*.js Makefile \
-	| entr -rcs '(npm run swagger; node index.js &; sleep 1 && time make test || notify-send -u critical -t 2000 "woops")'
+	| entr -rcs '(npm run swagger; npm start &; sleep 1 && time make test || notify-send -u critical -t 2000 "woops")'
 
 .PHONY: docs
 docs: ; ls *.js src/*/*.js \
-	| entr -rcs '(npm run swagger; node index.js)'
+	| entr -rcs '(npm run swagger; npm start)'
