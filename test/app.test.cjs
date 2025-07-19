@@ -33,3 +33,25 @@ describe("GET /api/products", () => {
       .expect((resp) => assert(resp.body.length > 0));
   });
 });
+
+async function doSearch(query, status, size) {
+  return request(app) // global
+    .get("/api/products/search")
+    .set("Authorization", `Bearer ${aToken}`) // global
+    .query(query)
+    .expect(status)
+    .expect("Content-Type", /json/)
+    .expect((resp) => assert(resp.body.length === size));
+}
+describe("GET /api/products/search", () => {
+  it("minPrice=10 search", async () => doSearch({ minPrice: 10 }, 200, 2));
+  it("maxPrice=1 search", async () => doSearch({ maxPrice: 1 }, 200, 0));
+  it("category=cpu search", async () => doSearch({ category: "cpu" }, 200, 1));
+  it("name=555 search", async () => doSearch({ name: "555" }, 200, 1));
+  it("foo=bar search", async () =>
+    request(app) // global
+      .get("/api/products/search")
+      .set("Authorization", `Bearer ${aToken}`) // global
+      .query({ foo: "bar" })
+      .expect(400));
+});
