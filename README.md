@@ -25,19 +25,35 @@ Este proyecto implementa una API REST en `Node.js` usando `Express`. Cuenta con 
    $ npm start
    ```
 
-4. Para realizar pruebas a la API local.
+## Testeo y Desarrollo
+
+### Usando las herramientas de consola
+
+1. Para realizar pruebas a la API local
    ``` shellsession
    $ make test
    ```
 
-5. Para realizar las pruebas a una API remota.
+2. Para realizar las pruebas a una API remota
    ``` shellsession
    $ make test URL=https://course-node-azimut1s-projects.vercel.app
    ```
 
-6. Alternativamente, podemos lanzar el servidor en modo **desarrollo**. Que integra la recarga del servidor y el testeo continuo.
+6. Para lanzar el servidor en modo desarrollo, recargando y retesteando en cada cambio de codigo
    ``` shellsession
    $ make dev
+   ```
+
+### Usando Mocha y Supertest
+
+1. Para realizar pruebas a la API local
+   ```shellsession
+   $ npm run test
+   ```
+
+2. Para lanzar el servidor en modo desarrollo, recargando y retesteando en cada cambio de codigo
+   ``` shellsession
+   $ npm run test:watch
    ```
 
 ## Tecnologias usadas
@@ -47,11 +63,15 @@ Este proyecto implementa una API REST en `Node.js` usando `Express`. Cuenta con 
   - [cors](https://www.npmjs.com/package/cors): para configurar CORS headers
   - [express-validator](https://www.npmjs.com/package/express-validator): para castear, validar y manejar errores de usuario
   - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken): para generar y validar tokens JWT
+  - [firebase](https://www.npmjs.com/package/firebase): libreria utilizada para acceder a los servicios de Firestore
   - [dotenv](https://www.npmjs.com/package/dotenv): para almacenar y obtener las credenciales de Firebase
   - [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express): para documentar y exponer la API para desarrolladores.
-  - [swagger-autogen](swagger-autogen): para autogenerar la documentacion
+  - [swagger-autogen](https://www.npmjs.com/package/swagger-autogen): para autogenerar la documentacion
+  - [chai](https://www.npmjs.com/package/chai): la libreria de aserciones para los tests
+  - [mocha](https://www.npmjs.com/package/mocha): el framework utilizado para correr los tests
+  - [supertest](https://www.npmjs.com/package/supertest): el cliente http utilizado para los tests
 
-- El entorno de **desarrollo** usa herramientas de consola para testear y validar la respuestas del API. Triggereado por cambiamos en el codigo.
+- El entorno de **desarrollo** cuenta tambien con herramientas de consola para testear y validar la respuestas del API. Triggereado por cambiamos en el codigo.
   - [Make](https://www.gnu.org/software/make/manual/make.html) - lenguaje de scripting usado para lanzar cada comando de prueba
   - [entr](https://github.com/eradman/entr) - ejecuta node junto con las pruebas de API en cada cambio de codigo
   - [curlie](https://github.com/rs/curlie) - cliente http para la terminal
@@ -287,4 +307,10 @@ access-control-allow-origin: *
 - Para saber que version de Node usar en el desarrollo.
   - https://vercel.com/docs/functions/runtimes/node-js/node-js-versions
   - https://render.com/docs/node-version#history-of-default-nodejs-versions
-- https://swagger.io/docs/specification/v2_0/api-host-and-base-path/
+- Docs
+  - [Swagger 2.0 Docs](https://swagger.io/docs/specification/v2_0/api-host-and-base-path/)
+- Testing
+  - [Jest + Supertest](https://www.dennisokeeffe.com/blog/2023-10-27-testing-express-apps-with-jest-and-supertest)
+  - [Jest + Supertest](https://medium.com/@it.ermias.asmare/node-js-express-with-jest-and-supertest-e58aaf4c4514)
+  - [Mocha + Supertest](https://medium.com/@ehtemam/writing-test-with-supertest-and-mocha-for-expressjs-routes-555d2910d2c2)
+  - [Chai - assert type assertions](https://www.chaijs.com/api/assert/)

@@ -7,7 +7,7 @@ import productsRoute from "./src/routes/products.routes.js";
 import authRoute from "./src/routes/auth.routes.js";
 import docsRoute from "./src/routes/docs.routes.cjs";
 
-const app = express();
+export const app = express();
 
 app.use(cors());
 app.use(express.json());
@@ -18,4 +18,6 @@ app.use((_req, res) =>
   res.status(http.NOT_FOUND).json({ error: http[http.NOT_FOUND] })
 );
 
-app.listen(port, () => console.log(`http://0.0.0.0:${port}`));
+export const server = app.listen(port, () =>
+  console.log(`http://0.0.0.0:${port}`)
+);

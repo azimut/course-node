@@ -23,5 +23,12 @@
       "timer",
       "sop"
     ]
+  },
+  {
+    "name": "6502",
+    "price": 650.2,
+    "categories": [
+      "cpu"
+    ]
   }
 ]
