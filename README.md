@@ -293,4 +293,4 @@ access-control-allow-origin: *
   - [Jest + Supertest](https://www.dennisokeeffe.com/blog/2023-10-27-testing-express-apps-with-jest-and-supertest)
   - [Jest + Supertest](https://medium.com/@it.ermias.asmare/node-js-express-with-jest-and-supertest-e58aaf4c4514)
   - [Mocha + Supertest](https://medium.com/@ehtemam/writing-test-with-supertest-and-mocha-for-expressjs-routes-555d2910d2c2)
-  - https://jestjs.io/docs/expect
+  - [Chai - assert type assertions](https://www.chaijs.com/api/assert/)

@@ -7,7 +7,7 @@ const data = require("./init.json");
 exports.mochaHooks = {
   beforeAll: async () => {
     await deleteProducts();
-    data.forEach(addNewProduct);
+    data.slice(0,3).forEach(addNewProduct);
   },
   afterAll: async () => {
     await terminate(db);
