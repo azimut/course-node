@@ -89,3 +89,12 @@ describe("PUT /api/products/:id", () => {
       .expect(204);
   });
 });
+
+describe("DELETE /api/products/:id", () => {
+  it("Delete new product", async () => {
+    return request(app)
+      .delete(`/api/products/${newProduct.id}`)
+      .set("Authorization", `Bearer ${aToken}`) // global
+      .expect(204);
+  });
+});
