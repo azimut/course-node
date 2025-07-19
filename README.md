@@ -287,4 +287,10 @@ access-control-allow-origin: *
 - Para saber que version de Node usar en el desarrollo.
   - https://vercel.com/docs/functions/runtimes/node-js/node-js-versions
   - https://render.com/docs/node-version#history-of-default-nodejs-versions
-- https://swagger.io/docs/specification/v2_0/api-host-and-base-path/
+- Docs
+  - [Swagger 2.0 Docs](https://swagger.io/docs/specification/v2_0/api-host-and-base-path/)
+- Testing
+  - [Jest + Supertest](https://www.dennisokeeffe.com/blog/2023-10-27-testing-express-apps-with-jest-and-supertest)
+  - [Jest + Supertest](https://medium.com/@it.ermias.asmare/node-js-express-with-jest-and-supertest-e58aaf4c4514)
+  - [Mocha + Supertest](https://medium.com/@ehtemam/writing-test-with-supertest-and-mocha-for-expressjs-routes-555d2910d2c2)
+  - https://jestjs.io/docs/expect
