@@ -21,4 +21,4 @@ app.use((_req, res) =>
 export const server = app.listen(port, () =>
   console.log(`http://0.0.0.0:${port}`)
 );
-server;
+export default app;
