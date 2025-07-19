@@ -1,5 +1,5 @@
+const { assert } = require("chai");
 const request = require("supertest");
-const assert = require("assert");
 const { app } = require("../index");
 const { default_user } = require("../src/utils/constants");
 const { generateToken } = require("../src/utils/token-generator");
@@ -13,7 +13,7 @@ describe("POST /auth/login", () => {
       .send({ email: default_user.email, password: default_user.password })
       .expect(200)
       .expect("Content-Type", /json/)
-      .expect((resp) => assert("token" in resp.body));
+      .expect((resp) => assert.property(resp.body, "token"));
   });
 });
 
@@ -30,7 +30,7 @@ describe("GET /api/products", () => {
       .set("Authorization", `Bearer ${aToken}`)
       .expect(200)
       .expect("Content-Type", /json/)
-      .expect((resp) => assert(resp.body.length > 0));
+      .expect((resp) => assert.isNotEmpty(resp.body));
   });
 });
 
@@ -41,7 +41,7 @@ async function doSearch(query, status, size) {
     .query(query)
     .expect(status)
     .expect("Content-Type", /json/)
-    .expect((resp) => assert(resp.body.length === size));
+    .expect((resp) => assert.strictEqual(resp.body.length, size));
 }
 describe("GET /api/products/search", () => {
   it("minPrice=10 search", async () => doSearch({ minPrice: 10 }, 200, 2));
